@@ -3,6 +3,12 @@
     src: url('../Fonts/JejuHallasan-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'MetalMania';
+    src: url('../Fonts/MetalMania-Regular.ttf');
+}
+
+
 .anchor {
     -fx-background-image:url('../Images/Frame5.png');
     -fx-background-size: cover;

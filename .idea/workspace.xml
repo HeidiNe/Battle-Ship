@@ -5,60 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff6bcba6-17c0-4544-ba81-344aaa0f8105" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/cssdialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/controller/ClientCtr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/helper/CountDownTimer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/helper/ShipDrawer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/helper/ShipGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/network/ClientListening.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/ConnectFrm.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/ConnectFrm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/HistoryFrm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/LoginFrm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/PlayFrm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/RankingFrm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/RegisterFrm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/ResultFrm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/SetShipFrm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/controller/GameCtr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/controller/ServerCtr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/dao/DAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/dao/MatchDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/dao/PlayerDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/database/database.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/helper/CountDownTimer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/network/ServerListening.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/network/ServerProcessing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/view/ServerMainFrm.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/server/view/ServerMainFrm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/shared/dto/IPAddress.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/shared/dto/ObjectWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/shared/dto/PlayerHistory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/shared/model/Match.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/shared/model/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fonts/JejuHallasan-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/History.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Login.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Main.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Play.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Ranking.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Register.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Result.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/SetShip.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Styles/Login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fonts/MetalMania-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/createaccount.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/controller/ClientCtr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/controller/ClientCtr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/view/LoginFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/LoginFrm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Register.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Styles/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Styles/Login.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,10 +55,10 @@
     &quot;Application.ServerMainFrm.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zlus/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Scene Builder/SceneBuilder.lnk&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/PTIT/Ky_I_nam_4/LTM/Battle-Ship/src/main/resources/Fonts&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -130,7 +85,7 @@
       <recent name="client.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ConnectFrm">
+  <component name="RunManager" selected="Application.ServerMainFrm">
     <configuration name="ConnectFrm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.view.ConnectFrm" />
       <module name="Battle-Ship" />
@@ -185,9 +140,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ServerMainFrm" />
         <item itemvalue="Application.ConnectFrm" />
         <item itemvalue="Application.LoginFrm" />
-        <item itemvalue="Application.ServerMainFrm" />
         <item itemvalue="Application.HelloApplication" />
       </list>
     </recent_temporary>
@@ -225,6 +180,8 @@
       <workItem from="1731087069337" duration="2346000" />
       <workItem from="1731119002659" duration="5937000" />
       <workItem from="1731125332421" duration="1266000" />
+      <workItem from="1731135506786" duration="6018000" />
+      <workItem from="1731142694035" duration="401000" />
     </task>
     <servers />
   </component>

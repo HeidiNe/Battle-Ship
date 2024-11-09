@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.application.Platform;
+
 import shared.dto.ObjectWrapper;
 import client.controller.ClientCtr;
 import shared.model.Player;
@@ -28,6 +30,8 @@ public class LoginFrm extends Application {
 
         try {
             Scene scene = new Scene(fxmlLoader.load());
+            mySocket.setLoginScreen(scene);
+
             stage.setScene(scene);
             stage.setTitle("Login");
             stage.show();
@@ -68,24 +72,26 @@ public class LoginFrm extends Application {
     }
 
     public void receivedDataProcessing(ObjectWrapper data) {
-        String result = (String) data.getData();
-        if (result.equals("false")) {
-            // txtResult.setText("Error: Incorrect username or password.");
-        } else {
-            System.out.println("dung");
-            TextField usernameLoginTextField = (TextField) fxmlLoader.getNamespace().get("usernameLoginTextField");
-            String username = usernameLoginTextField.getText();
+        Platform.runLater(() -> {
+            String result = (String) data.getData();
+            Scene loginScreen = mySocket.getLoginScreen();
+            if (result.equals("false")) {
+                // txtResult.setText("Error: Incorrect username or password.");
+            } else {
+                TextField usernameLoginTextField = (TextField) loginScreen.lookup("#usernameLoginTextField");
+                String username = usernameLoginTextField.getText();
 
-            mySocket.setUsername(username);
-            System.out.println(username);
+                mySocket.setUsername(username);
+                System.out.println(username);
 
-            mySocket.sendData(new ObjectWrapper(ObjectWrapper.LOGIN_SUCCESSFUL, mySocket.getUsername()));
-            if (mySocket.getMainFrm() == null) {
-                MainFrm mainFrm = new MainFrm();
-                mySocket.setMainFrm(mainFrm);
+                mySocket.sendData(new ObjectWrapper(ObjectWrapper.LOGIN_SUCCESSFUL, mySocket.getUsername()));
+
+                if (mySocket.getMainFrm() == null) {
+                    MainFrm mainFrm = new MainFrm();
+                    mySocket.setMainFrm(mainFrm);
+                }
+                mySocket.getMainFrm().openScene();
             }
-
-            mySocket.getMainFrm().openScene();
-        }
+        });
     }
 }

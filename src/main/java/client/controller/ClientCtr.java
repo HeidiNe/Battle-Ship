@@ -2,6 +2,8 @@ package client.controller;
 
 import client.network.ClientListening;
 import client.view.*;
+import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import shared.dto.IPAddress;
 import shared.dto.ObjectWrapper;
@@ -35,6 +37,14 @@ public class ClientCtr {
     private RankingFrm rankingFrm;
     private RegisterFrm registerFrm;
 
+    private Scene loginScreen;
+    private Scene mainScene;
+    private Scene setShipScene;
+    private Scene playScene;
+    private Scene resultScene;
+    private Scene historyScene;
+    private Scene rankingScene;
+    private Scene registerScene;
 
     public ClientCtr (){}
 
@@ -191,5 +201,37 @@ public class ClientCtr {
     public void setResultFrm(ResultFrm resultFrm) {
         this.resultFrm = resultFrm;
     }
+
+    public Scene getLoginScreen() {return loginScreen;}
+
+    public void setLoginScreen(Scene loginScreen) {this.loginScreen = loginScreen;}
+
+    public Scene getMainScene() {return mainScene;}
+
+    public void setMainScene(Scene mainScene) {this.mainScene = mainScene;}
+
+    public Scene getSetShipScene() {return setShipScene;}
+
+    public void setSetShipScene(Scene setShipScene) {this.setShipScene = setShipScene;}
+
+    public Scene getPlayScene() {return playScene;}
+
+    public void setPlayScene(Scene playScene) {this.playScene = playScene;}
+
+    public Scene getResultScene() {return resultScene;}
+
+    public void setResultScene(Scene resultScene) {this.resultScene = resultScene;}
+
+    public Scene getHistoryScene() {return historyScene;}
+
+    public void setHistoryScene(Scene historyScene) {this.historyScene = historyScene;}
+
+    public Scene getRankingScene() {return rankingScene;}
+
+    public void setRankingScene(Scene rankingScene) {this.rankingScene = rankingScene;}
+
+    public Scene getRegisterScene() {return registerScene;}
+
+    public void setRegisterScene(Scene registerScene) {this.registerScene = registerScene;}
 
 }
