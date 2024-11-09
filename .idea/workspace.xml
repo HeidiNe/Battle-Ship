@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ff6bcba6-17c0-4544-ba81-344aaa0f8105" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/cssdialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/controller/ClientCtr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/helper/CountDownTimer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/helper/ShipDrawer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/helper/ShipGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/network/ClientListening.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/ConnectFrm.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/ConnectFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/HistoryFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/LoginFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/PlayFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/RankingFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/RegisterFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/ResultFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/client/view/SetShipFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/controller/GameCtr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/controller/ServerCtr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/dao/DAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/dao/MatchDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/dao/PlayerDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/database/database.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/helper/CountDownTimer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/network/ServerListening.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/network/ServerProcessing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/view/ServerMainFrm.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/server/view/ServerMainFrm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/shared/dto/IPAddress.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/shared/dto/ObjectWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/shared/dto/PlayerHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/shared/model/Match.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/shared/model/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fonts/JejuHallasan-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/History.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Main.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Play.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Ranking.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Register.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Result.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/SetShip.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Styles/Login.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2oVYpMKAXwuL2ups5zpFLz4TMSC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ConnectFrm.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LoginFrm.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ServerMainFrm.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zlus/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Scene Builder/SceneBuilder.lnk&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="client.view" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\PTIT\Ky_I_nam_4\LTM\Battle-Ship\src\main\resources\Fonts" />
+      <recent name="E:\PTIT\Ky_I_nam_4\LTM\Battle-Ship\src\main\java\client\view" />
+      <recent name="E:\PTIT\Ky_I_nam_4\LTM\Battle-Ship\src\main\java\server\view" />
+      <recent name="E:\PTIT\Ky_I_nam_4\LTM\Battle-Ship\src\main\java\server\network" />
+      <recent name="E:\PTIT\Ky_I_nam_4\LTM\Battle-Ship\src\main\java\server\database" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="server.helper" />
+      <recent name="client.network" />
+      <recent name="client.controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ConnectFrm">
+    <configuration name="ConnectFrm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="client.view.ConnectFrm" />
+      <module name="Battle-Ship" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="client.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ltm.battleship.HelloApplication" />
+      <module name="Battle-Ship" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ltm.battleship.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginFrm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="client.view.LoginFrm" />
+      <module name="Battle-Ship" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="client.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerMainFrm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="server.view.ServerMainFrm" />
+      <module name="Battle-Ship" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="server.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ConnectFrm" />
+        <item itemvalue="Application.LoginFrm" />
+        <item itemvalue="Application.ServerMainFrm" />
+        <item itemvalue="Application.HelloApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ff6bcba6-17c0-4544-ba81-344aaa0f8105" name="Changes" comment="" />
+      <created>1730956393647</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730956393647</updated>
+      <workItem from="1730956394707" duration="5712000" />
+      <workItem from="1730964887867" duration="1746000" />
+      <workItem from="1730972824585" duration="195000" />
+      <workItem from="1730974696247" duration="2691000" />
+      <workItem from="1731008902352" duration="8258000" />
+      <workItem from="1731023284373" duration="2073000" />
+      <workItem from="1731026100828" duration="322000" />
+      <workItem from="1731026465831" duration="1647000" />
+      <workItem from="1731028304028" duration="5179000" />
+      <workItem from="1731035188704" duration="857000" />
+      <workItem from="1731047878910" duration="3976000" />
+      <workItem from="1731052113343" duration="4029000" />
+      <workItem from="1731078684357" duration="7980000" />
+      <workItem from="1731086768265" duration="146000" />
+      <workItem from="1731087069337" duration="2346000" />
+      <workItem from="1731119002659" duration="5937000" />
+      <workItem from="1731125332421" duration="1266000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

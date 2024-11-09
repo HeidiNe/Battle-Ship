@@ -1,0 +1,195 @@
+package client.controller;
+
+import client.network.ClientListening;
+import client.view.*;
+import javafx.stage.Stage;
+import shared.dto.IPAddress;
+import shared.dto.ObjectWrapper;
+import shared.model.Player;
+
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+public class ClientCtr {
+
+    private static ClientCtr instance;
+
+    private Socket mySocket;
+    private ClientListening myListening;
+    private volatile boolean isConnected = false;
+    private IPAddress serverAddress = new IPAddress("localhost", 8888);
+
+    private ObjectOutputStream oos;
+
+    private String username;
+    private Stage stage;
+
+    private ConnectFrm connectFrm;
+    private LoginFrm loginFrm;
+    private MainFrm mainFrm;
+    private SetShipFrm setShipFrm;
+    private PlayFrm playFrm;
+    private ResultFrm resultFrm;
+    private HistoryFrm historyFrm;
+    private RankingFrm rankingFrm;
+    private RegisterFrm registerFrm;
+
+
+    public ClientCtr (){}
+
+    public ClientCtr(ConnectFrm connectFrm) throws IOException {
+        this.connectFrm = connectFrm;
+    }
+
+    public ClientCtr(ConnectFrm connectFrm, IPAddress serverAddr) throws IOException {
+        this.connectFrm = connectFrm;
+        this.serverAddress = serverAddr;
+    }
+
+    // Method static để lấy instance duy nhất của class
+    public static ClientCtr getInstance() {
+        // Nếu chưa có instance thì tạo mới
+        if(instance == null) {
+            instance = new ClientCtr();
+        }
+        // Trả về instance đã có
+        return instance;
+    }
+
+    public boolean openConnection() {
+        try {
+            mySocket = new Socket(serverAddress.getHost(), serverAddress.getPort());
+            this.oos = new ObjectOutputStream(mySocket.getOutputStream());
+            myListening = new ClientListening(instance);
+            myListening.start();
+            isConnected = true;
+            connectFrm.showMessage("Connected to the server at host: " + serverAddress.getHost() + ", port: " + serverAddress.getPort());
+        } catch (Exception e) {
+            connectFrm.showMessage("Error when connecting to the server!");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean sendData(Object obj) {
+        try {
+            oos.writeObject(obj);
+            ObjectWrapper check = (ObjectWrapper) obj;
+            Player test = (Player) check.getData();
+            System.out.println(test.getUsername() + " " + test.getPassword());
+            oos.flush();
+        } catch (Exception e) {
+            connectFrm.showMessage("Error when sending data to the server!");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean closeConnection() {
+        if (!isConnected) {
+            return true;
+        }
+        try {
+            isConnected = false;
+            if (myListening != null) {
+                myListening.stopListening();
+            }
+            if (mySocket != null) {
+                mySocket.close();
+            }
+            connectFrm.showMessage("Disconnected from the server!");
+            return true;
+        } catch (Exception e) {
+            connectFrm.showMessage("Error when disconnecting from the server!");
+            return false;
+        }
+    }
+
+    public void setInstance(ClientCtr clientCtr) {instance = clientCtr;}
+
+    public ConnectFrm getConnectFrm() {
+        return connectFrm;
+    }
+
+    public Socket getMySocket() {
+        return mySocket;
+    }
+
+    public LoginFrm getLoginFrm() {
+        return loginFrm;
+    }
+
+    public RegisterFrm getRegisterFrm() {
+        return registerFrm;
+    }
+
+    public void setRegisterFrm(RegisterFrm registerFrm) {
+        this.registerFrm = registerFrm;
+    }
+
+    public void setLoginFrm(LoginFrm loginFrm) {
+        this.loginFrm = loginFrm;
+    }
+
+    public MainFrm getMainFrm() {
+        return mainFrm;
+    }
+
+    public void setMainFrm(MainFrm mainFrm) {
+        this.mainFrm = mainFrm;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setStage(Stage stage) {this.stage = stage;}
+
+    public Stage getStage() {return stage;}
+
+    public HistoryFrm getHistoryFrm() {
+        return historyFrm;
+    }
+
+    public void setHistoryFrm(HistoryFrm historyFrm) {
+        this.historyFrm = historyFrm;
+    }
+
+    public RankingFrm getRankingFrm() {
+        return rankingFrm;
+    }
+
+    public void setRankingFrm(RankingFrm rankingFrm) {
+        this.rankingFrm = rankingFrm;
+    }
+
+    public SetShipFrm getSetShipFrm() {
+        return setShipFrm;
+    }
+
+    public void setSetShipFrm(SetShipFrm setShipFrm) {
+        this.setShipFrm = setShipFrm;
+    }
+
+    public PlayFrm getPlayFrm() {
+        return playFrm;
+    }
+
+    public void setPlayFrm(PlayFrm playFrm) {
+        this.playFrm = playFrm;
+    }
+
+    public ResultFrm getResultFrm() {
+        return resultFrm;
+    }
+
+    public void setResultFrm(ResultFrm resultFrm) {
+        this.resultFrm = resultFrm;
+    }
+
+}
