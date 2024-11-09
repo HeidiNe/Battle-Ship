@@ -93,6 +93,9 @@ public class ClientListening extends Thread {
                             case ObjectWrapper.SERVER_TRANSFER_QUIT_WHEN_PLAY:
                                 clientCtr.getPlayFrm().receivedDataProcessing(data);
                                 break;
+                            case ObjectWrapper.SERVER_SEND_ALL_USER:
+                                clientCtr.getMainFrm().receivedDataProcessing(data);
+                                break;
                         }
 
                     }

@@ -5,15 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff6bcba6-17c0-4544-ba81-344aaa0f8105" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fonts/MetalMania-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/createaccount.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/CircleImage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemUser.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Styles/Main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/controller/ClientCtr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/controller/ClientCtr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/view/LoginFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/LoginFrm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/network/ClientListening.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/network/ClientListening.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/controller/ServerCtr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/controller/ServerCtr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/dao/PlayerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/dao/PlayerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/network/ServerProcessing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/network/ServerProcessing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/view/ServerMainFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/view/ServerMainFrm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/shared/dto/ObjectWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/shared/dto/ObjectWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/shared/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/shared/model/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Register.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Styles/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Styles/Login.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +28,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="CSS File" />
         <option value="FxmlFile" />
       </list>
     </option>
@@ -47,27 +52,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ConnectFrm.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.LoginFrm.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ServerMainFrm.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/PTIT/Ky_I_nam_4/LTM/Battle-Ship/src/main/resources/Fonts&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ConnectFrm.executor": "Run",
+    "Application.HelloApplication.executor": "Run",
+    "Application.LoginFrm.executor": "Run",
+    "Application.ServerMainFrm.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "mainFrm",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/PTIT/Ky_I_nam_4/LTM/BTL/Battle-Ship",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.JavaFX",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="client.view" />
@@ -85,7 +91,7 @@
       <recent name="client.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ServerMainFrm">
+  <component name="RunManager" selected="Application.ConnectFrm">
     <configuration name="ConnectFrm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.view.ConnectFrm" />
       <module name="Battle-Ship" />
@@ -140,8 +146,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerMainFrm" />
         <item itemvalue="Application.ConnectFrm" />
+        <item itemvalue="Application.ServerMainFrm" />
         <item itemvalue="Application.LoginFrm" />
         <item itemvalue="Application.HelloApplication" />
       </list>
@@ -181,11 +187,16 @@
       <workItem from="1731119002659" duration="5937000" />
       <workItem from="1731125332421" duration="1266000" />
       <workItem from="1731135506786" duration="6018000" />
-      <workItem from="1731142694035" duration="401000" />
+      <workItem from="1731142694035" duration="1409000" />
+      <workItem from="1731144184378" duration="33040000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

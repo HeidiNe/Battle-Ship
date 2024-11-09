@@ -1,8 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="516.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-
-</AnchorPane>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="773.0" stylesheets="@../../Styles/Main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="516.0" prefWidth="525.0">
+         <children>
+            <HBox prefHeight="65.0" prefWidth="517.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="105.0" styleClass="menu-button-main" text="HOME" />
+                  <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="130.0" styleClass="menu-button-main" text="MATCH HISTORY" />
+                  <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="133.0" styleClass="menu-button-main" text="RANKED" />
+               </children>
+            </HBox>
+            <Pane prefHeight="1.0" prefWidth="295.0" styleClass="line-vbox" />
+         </children>
+      </VBox>
+      <VBox prefHeight="516.0" prefWidth="265.0" styleClass="vbox-user">
+         <children>
+            <AnchorPane prefHeight="65.0" prefWidth="257.0">
+               <children>
+                  <Circle fill="#262825" layoutX="37.0" layoutY="33.0" radius="23.0" stroke="#40db0d" strokeType="INSIDE" strokeWidth="2.0" styleClass="info-userMain" AnchorPane.leftAnchor="14.0" />
+                  <VBox layoutX="69.0" layoutY="10.0" prefHeight="46.0" prefWidth="174.0" AnchorPane.leftAnchor="69.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <Label fx:id="usernameMain" prefHeight="19.0" prefWidth="173.0" text="Nguyen Minh Thang">
+                           <font>
+                              <Font name="Segoe Script Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="18.0" prefWidth="159.0" text="Online">
+                           <font>
+                              <Font name="Roboto" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <Pane prefHeight="1.0" prefWidth="295.0" styleClass="line-vbox" />
+            <HBox prefHeight="40.0" prefWidth="295.0" styleClass="title-list-user">
+               <children>
+                  <Pane prefHeight="39.0" prefWidth="1.0" styleClass="line-hbox" />
+                  <Label prefHeight="39.0" prefWidth="203.0" text="  Players" />
+                  <Label prefHeight="39.0" prefWidth="60.0" text="Invite" />
+               </children>
+            </HBox>
+            <ScrollPane prefHeight="408.0" prefWidth="257.0">
+               <content>
+                  <VBox fx:id="listUerVbox" prefHeight="399.0" prefWidth="240.0">
+                     <children>
+                        <HBox prefHeight="41.0" prefWidth="238.0">
+                           <children>
+                              <AnchorPane prefHeight="41.0" prefWidth="206.0">
+                                 <children>
+                                    <Circle fill="#262825" layoutX="23.0" layoutY="21.0" radius="17.0" stroke="#40db0d" strokeType="INSIDE" strokeWidth="2.0" styleClass="info-userMain" />
+                                    <Label layoutX="47.0" layoutY="19.0" prefHeight="24.0" prefWidth="105.0" text="In game">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="47.0" layoutY="-1.0" prefHeight="24.0" prefWidth="133.0" text="Vu Xuan Thinh">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="41.0" prefWidth="67.0">
+                                 <children>
+                                    <Button layoutX="6.0" layoutY="1.0" minWidth="46.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="46.0" styleClass="buttom-check">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../Images/plus.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                           </children></HBox>
+                     </children>
+                  </VBox>
+               </content></ScrollPane>
+         </children></VBox>
+   </children>
+</HBox>

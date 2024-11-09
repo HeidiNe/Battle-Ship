@@ -11,6 +11,7 @@ public class Player implements Serializable {
     private int totalLosses;
     private int totalAfk;
     private int totalDraw;
+    private String status;
     public Player() {
         super();
         this.points = 0;
@@ -18,6 +19,7 @@ public class Player implements Serializable {
         this.totalLosses=0;
         this.totalAfk=0;
         this.totalDraw=0;
+        this.status = "offline";
     }
     
     public Player(String username, String password) {
@@ -80,6 +82,12 @@ public class Player implements Serializable {
 
     public void setTotalAfk(int totalAfk) {
         this.totalAfk = totalAfk;
+    }
+
+    public String getStatus() {return status;}
+
+    public void setStatus(String status) {this.status = status;
+        System.out.println("Status: " + this.status);
     }
 
 }
