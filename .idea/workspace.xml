@@ -5,19 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff6bcba6-17c0-4544-ba81-344aaa0f8105" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/CircleImage.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemUser.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Styles/Main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemHome.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Ranked.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Styles/History.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Styles/Home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Styles/Ranked.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/network/ClientListening.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/network/ClientListening.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/controller/ServerCtr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/controller/ServerCtr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/dao/PlayerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/dao/PlayerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/network/ServerProcessing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/network/ServerProcessing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/server/view/ServerMainFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/view/ServerMainFrm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/shared/dto/ObjectWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/shared/dto/ObjectWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/shared/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/shared/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/History.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/History.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Ranking.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/icon-check.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/iconAccept.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,7 @@
       <list>
         <option value="Class" />
         <option value="CSS File" />
+        <option value="TypeScript File" />
         <option value="FxmlFile" />
       </list>
     </option>
@@ -71,6 +70,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.JavaFX",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -188,12 +188,24 @@
       <workItem from="1731125332421" duration="1266000" />
       <workItem from="1731135506786" duration="6018000" />
       <workItem from="1731142694035" duration="1409000" />
-      <workItem from="1731144184378" duration="33040000" />
+      <workItem from="1731144184378" duration="33586000" />
+      <workItem from="1731198644437" duration="15780000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/client/view/MainFrm.java</url>
+          <line>187</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

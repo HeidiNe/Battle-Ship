@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -16,6 +17,7 @@ import shared.dto.ObjectWrapper;
 import javafx.application.Platform;
 import shared.model.Player;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -41,6 +43,61 @@ public class MainFrm {
                 //set username main lblUserName01
                 Label lblUserName = (Label) loader.getNamespace().get("usernameMain");
                 lblUserName.setText(mySocket.getUsername());
+
+                // Lay button Home, History, Ranking va stackPane
+                Button btnHome = (Button)  loader.getNamespace().get("btnHome");
+                Button btnHistory = (Button)  loader.getNamespace().get("btnHistory");
+                Button btnRanked = (Button)  loader.getNamespace().get("btnRanked");
+                StackPane stackPane = (StackPane) loader.getNamespace().get("stackPane");
+
+                FXMLLoader loaderHome = new FXMLLoader(getClass().getResource("/Fxml/Client/Home.fxml"));
+                FXMLLoader loaderHistory = new FXMLLoader(getClass().getResource("/Fxml/Client/History.fxml"));
+                FXMLLoader loaderRanked = new FXMLLoader(getClass().getResource("/Fxml/Client/Ranked.fxml"));
+
+                AnchorPane home = loaderHome.load();
+                AnchorPane history = loaderHistory.load();
+                AnchorPane ranked = loaderRanked.load();
+
+                stackPane.getChildren().add(home);
+                stackPane.getChildren().add(history);
+                stackPane.getChildren().add(ranked);
+
+                home.setVisible(true);
+                history.setVisible(false);
+                ranked.setVisible(false);
+
+                // Xu ly su kien click vao button Home
+                btnHome.setOnAction(event -> {
+                    try {
+                        home.setVisible(true);
+                        history.setVisible(false);
+                        ranked.setVisible(false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+                // Xu ly su kien click vao button History
+                btnHistory.setOnAction(event -> {
+                    try {
+                        home.setVisible(false);
+                        history.setVisible(true);
+                        ranked.setVisible(false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+                // Xu ly su kien click vao button Ranking
+                btnRanked.setOnAction(event -> {
+                    try {
+                        home.setVisible(false);
+                        history.setVisible(false);
+                        ranked.setVisible(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
 
                 //client send request to server to get all user
                 mySocket.sendData(new ObjectWrapper(ObjectWrapper.GET_ALL_USER, null));
@@ -104,8 +161,6 @@ public class MainFrm {
                 case ObjectWrapper.SERVER_INFORM_CLIENT_WAITING:
                 // cap nhat status cua user
                     ArrayList<Player> listUserWaiting = (ArrayList<Player>) data.getData();
-                    System.out.println("listUserWaiting: " + listUserWaiting.size());
-
                     ArrayList<HBox> listUserItem = new ArrayList<>();
                     VBox screnListUserWaiting = (VBox) scene.lookup("#listUerVbox");
 
@@ -117,7 +172,6 @@ public class MainFrm {
                         Label lblStatus = (Label) anchorPane.lookup("#statusItem");
                         Circle circleStatus = (Circle) anchorPane.lookup("#circleStatus");
                         Button btnInvite = (Button) itemUser.lookup("#buttonInvite");
-
 
                         if(lblUserName == null) {
                             System.out.println("lblUserName is null");
@@ -132,9 +186,15 @@ public class MainFrm {
                             for (Player player : listUserWaiting) {
                                 if (lblUserName.getText().equals(player.getUsername())) {
                                     circleStatus.setStyle("-fx-stroke: #00ff00");
+                                    lblStatus.setStyle("-fx-text-fill: #4a8f4a");
                                     if(player.getStatus().equals("Online")) {
-                                        btnInvite.setVisible(true);
+
                                         lblStatus.setText("Online");
+                                        btnInvite.setVisible(true);
+
+                                        btnInvite.setOnAction(event -> {
+                                            mySocket.sendData(new ObjectWrapper(ObjectWrapper.SEND_PLAY_REQUEST, player.getUsername()));
+                                        });
                                     }
                                     if (player.getStatus().equals("In Game")) lblStatus.setText("In Game");
                                     break;
@@ -144,7 +204,56 @@ public class MainFrm {
                         }
                     }
                     break;
-                case ObjectWrapper.SERVER_SEND_HISTORY:
+                case ObjectWrapper.RECEIVE_PLAY_REQUEST:
+                    String username = (String) data.getData();
+
+                    VBox receivePlayRequest = (VBox) scene.lookup("#RECEIVE_PLAY_REQUEST");
+
+                    boolean isExist = false;
+
+                    ArrayList<HBox> listUserItemReceive = new ArrayList<>();
+                    for (int i = 0; i < receivePlayRequest.getChildren().size(); i++) {
+                        HBox itemUser = (HBox) receivePlayRequest.getChildren().get(i);
+                        AnchorPane anchorPane = (AnchorPane) itemUser.getChildren().getFirst();
+                        Label lblUserName = (Label) anchorPane.lookup("#userNameInvite");
+                        if(lblUserName.getText().equals(username)) {
+                            isExist = true;
+                            break;
+                        }
+                    }
+
+                    if (isExist) {
+                        break;
+                    }
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/ItemHome.fxml"));
+                    try {
+                        HBox itemUser = loader.load();
+                        Label lblUserNameInvite = (Label) itemUser.lookup("#userNameInvite");
+
+                        lblUserNameInvite.setText(username);
+                        receivePlayRequest.getChildren().add(itemUser);
+
+                        // Xu ly su kien click vao button Accept: chap nhan loi moi choi
+                        Button btnAccept = (Button) itemUser.lookup("#btnAccept");
+                        btnAccept.setOnAction(event -> {
+                            mySocket.sendData(new ObjectWrapper(ObjectWrapper.ACCEPTED_PLAY_REQUEST));
+                            receivePlayRequest.getChildren().remove(itemUser);
+                        });
+
+                        // Xu ly su kien click vao button Reject: tu choi loi moi choi
+                        Button btnReject = (Button) itemUser.lookup("#btnReject");
+                        btnReject.setOnAction(event -> {
+                            mySocket.sendData(new ObjectWrapper(ObjectWrapper.REJECTED_PLAY_REQUEST));
+                            receivePlayRequest.getChildren().remove(itemUser);
+                        });
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    break;
+                case ObjectWrapper.SERVER_SEND_PLAY_REQUEST_ERROR:
 
             }
         });

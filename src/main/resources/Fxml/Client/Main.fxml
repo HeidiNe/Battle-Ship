@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
@@ -18,12 +19,13 @@
          <children>
             <HBox prefHeight="65.0" prefWidth="517.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="105.0" styleClass="menu-button-main" text="HOME" />
-                  <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="130.0" styleClass="menu-button-main" text="MATCH HISTORY" />
-                  <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="133.0" styleClass="menu-button-main" text="RANKED" />
+                  <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="65.0" prefWidth="105.0" styleClass="menu-button-main" text="HOME" />
+                  <Button fx:id="btnHistory" mnemonicParsing="false" prefHeight="65.0" prefWidth="130.0" styleClass="menu-button-main" text="MATCH HISTORY" />
+                  <Button fx:id="btnRanked" mnemonicParsing="false" prefHeight="65.0" prefWidth="133.0" styleClass="menu-button-main" text="RANKED" />
                </children>
             </HBox>
             <Pane prefHeight="1.0" prefWidth="295.0" styleClass="line-vbox" />
+            <StackPane fx:id="stackPane" prefHeight="449.0" prefWidth="516.0" />
          </children>
       </VBox>
       <VBox prefHeight="516.0" prefWidth="265.0" styleClass="vbox-user">
