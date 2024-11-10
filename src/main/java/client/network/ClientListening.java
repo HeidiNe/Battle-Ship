@@ -53,19 +53,19 @@ public class ClientListening extends Thread {
                             case ObjectWrapper.SERVER_SET_GAME_READY:
                                 clientCtr.getMainFrm().receivedDataProcessing(data);
                                 break;
-                            case ObjectWrapper.SERVER_REQUEST_READY_GAME:
-                                System.out.println("Client: Có ai đó chưa xếp xong");
-                                clientCtr.getSetShipFrm().receivedDataProcessing(data);
-                                break;
-                            case ObjectWrapper.SERVER_RANDOM_NOT_TURN:
-                                clientCtr.getSetShipFrm().receivedDataProcessing(data);
-                                break;
-                            case ObjectWrapper.SERVER_RANDOM_TURN:
-                                clientCtr.getSetShipFrm().receivedDataProcessing(data);
-                                break;
-                            case ObjectWrapper.SERVER_START_PLAY_GAME:
-                                clientCtr.getSetShipFrm().receivedDataProcessing(data);
-                                break;
+//                            case ObjectWrapper.SERVER_REQUEST_READY_GAME:
+//                                System.out.println("Client: Có ai đó chưa xếp xong");
+//                                clientCtr.getSetShipFrm().receivedDataProcessing(data);
+//                                break;
+//                            case ObjectWrapper.SERVER_RANDOM_NOT_TURN:
+//                                clientCtr.getSetShipFrm().receivedDataProcessing(data);
+//                                break;
+//                            case ObjectWrapper.SERVER_RANDOM_TURN:
+//                                clientCtr.getSetShipFrm().receivedDataProcessing(data);
+//                                break;
+//                            case ObjectWrapper.SERVER_START_PLAY_GAME:
+//                                clientCtr.getSetShipFrm().receivedDataProcessing(data);
+//                                break;
                             case ObjectWrapper.SERVER_TRANSFER_SHOOT_FAILTURE:
                                 clientCtr.getPlayFrm().receivedDataProcessing(data);
                                 break;
@@ -87,9 +87,9 @@ public class ClientListening extends Thread {
                             case ObjectWrapper.SERVER_SEND_RESULT:
                                 clientCtr.getResultFrm().receivedDataProcessing(data);
                                 break;
-                            case ObjectWrapper.SERVER_TRANSFER_QUIT_WHEN_SET_SHIP:
-                                clientCtr.getSetShipFrm().receivedDataProcessing(data);
-                                break;
+//                            case ObjectWrapper.SERVER_TRANSFER_QUIT_WHEN_SET_SHIP:
+//                                clientCtr.getSetShipFrm().receivedDataProcessing(data);
+//                                break;
                             case ObjectWrapper.SERVER_TRANSFER_QUIT_WHEN_PLAY:
                                 clientCtr.getPlayFrm().receivedDataProcessing(data);
                                 break;
