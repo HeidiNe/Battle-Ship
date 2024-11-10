@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'JejuHallasan';
+    src: url('../Fonts/JejuHallasan-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'MetalMania';
+    src: url('../Fonts/MetalMania-Regular.ttf');
+}
+
+
+.anchor {
+    -fx-background-image:url('../Images/intro.gif');
+    -fx-background-size: cover;
+}
+
+.line-vbox {
+    -fx-background-color: rgba(207, 50, 50, 0.96);
+}
+
+.line-hbox{
+    -fx-background-color: rgba(193, 193, 193, 0.96);
+}
+
+.vbox-user {
+    -fx-background-color: rgba(198, 173, 173, 0.96);
+}
+
+.list-user {
+    -fx-background-color:  rgba(37, 36, 36, 0.96);
+}
+
+.title-list-user {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #ffffff;
+}
+
+.menu-button-main{
+    -fx-background-color: rgba(255, 23, 23, 0);
+    -fx-text-fill: rgba(44, 64, 53, 0.7);
+    -fx-font-size: 14px;
+    -fx-font-family: JejuHallasan;
+    -fx-font-weight: 700;
+}
+
+.menu-button-main:hover {
+    -fx-background-color: rgba(255, 23, 23, 0);
+    -fx-text-fill: rgba(29, 43, 35, 0.9);
+}
+
+.avatar-main-user {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-radius: 50%;
+
+
+}
+
+.button-avatar {
+    -fx-background-image: url(../Images/avata1.png);
+    -fx-background-radius: 50%;
+
+}
+
+.status {
+    -fx-background-color: rgb(96, 197, 142);
+    -fx-background-radius: 50%;
+
+}
+
+.blb_status{
+    -fx-text-fill: rgb(96, 197, 142);
+}
+
+.buttom-check{
+    -fx-background-color: rgba(255, 255, 255, 0);
+}
+
+/*.usernameMain{*/
+/*    -fx-text-fill: #000000;*/
+/*    !*-fx-font-family: "Segoe Script";*!*/
+/*    !*-fx-font-size: 14px;*!*/
+/*    !*-fx-font-style: bold    ;*!*/
+/*}*/

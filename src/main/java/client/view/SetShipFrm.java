@@ -1,8 +1,13 @@
 package client.view;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import shared.dto.ObjectWrapper;
 import client.controller.ClientCtr;
@@ -32,7 +37,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import server.helper.CountDownTimer;
 
-public class SetShipFrm extends Application {
+public class SetShipFrm {
 
     private FXMLLoader fxmlLoader;
     private ClientCtr mySocket = ClientCtr.getInstance();
@@ -51,8 +56,10 @@ public class SetShipFrm extends Application {
     }
 
 
-    @Override
-    public void start(Stage stage) throws Exception {
+    public void openScene() {
+        Platform.runLater(() -> {
+
+        });
 
         mySocket.setStage(stage);
 
@@ -196,6 +203,7 @@ public class SetShipFrm extends Application {
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
 
     private boolean isValidLocation(String location) {
         int row = location.charAt(1) - '0';
@@ -298,6 +306,9 @@ public class SetShipFrm extends Application {
     private void initiateShips(){
         shipListModel = new ArrayList<>(Arrays.asList("#ship2", "#ship3-1", "#ship3-2", "#ship4", "#ship5"));
 
+=======
+    public void receivedDataProcessing(ObjectWrapper data) {
+>>>>>>> main
     }
     private void reset() {
         shipsLocation.clear();

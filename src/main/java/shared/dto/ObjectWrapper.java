@@ -9,6 +9,12 @@ public class ObjectWrapper implements Serializable {
     // server respone request login
     public static final int SERVER_LOGIN_USER = 2;
 
+    // client gửi request get all user
+    public static final int GET_ALL_USER = 18;
+
+    // server gửi danh sách user
+    public static final int SERVER_SEND_ALL_USER = 27;
+
     // server gửi cập nhật số number client online
     public static final int SERVER_INFORM_CLIENT_NUMBER = 3;
 
