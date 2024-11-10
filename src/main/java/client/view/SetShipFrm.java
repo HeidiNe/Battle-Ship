@@ -32,10 +32,10 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import server.helper.CountDownTimer;
 
-public class SetShipFrm extends Application {
+public class SetShipFrm {
 
-    private FXMLLoader fxmlLoader;
     private ClientCtr mySocket = ClientCtr.getInstance();
+    private Stage stage = mySocket.getStage();
     private boolean playerTurn = false;
     private int shipSize; //Kích thước tàu hiện tại được chọn để sắp
     private int shipIndexList; //Vị trí tàu được chọn (trong list) hiện tại trong danh sách tàu
@@ -47,17 +47,14 @@ public class SetShipFrm extends Application {
     private Timeline TimeCD;
     
     public SetShipFrm() {
-        fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Client/SetShip.fxml"));
     }
 
+    public void openScene(){
 
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        mySocket.setStage(stage);
 
         try {
-            Scene scene = new Scene(fxmlLoader.load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/SetShip.fxml"));
+            Scene scene = new Scene(loader.load());
             mySocket.setSetShipScene(scene);
             
             stage.setScene(scene);
@@ -290,9 +287,6 @@ public class SetShipFrm extends Application {
         } else {
             GridPane.setRowSpan(shipPane, currentShip.size()); 
         }
-    }
-    public void openScene (){
-        launch();
     }
     
     private void initiateShips(){

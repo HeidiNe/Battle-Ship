@@ -15,23 +15,19 @@ import static javafx.application.Application.launch;
 import javafx.scene.control.Label;
 import shared.model.Player;
 
-public class RegisterFrm extends Application {
+public class RegisterFrm {
 
-    private FXMLLoader fxmlLoader;
     private ClientCtr mySocket = ClientCtr.getInstance();
+    private Stage stage = mySocket.getStage();
 
     public RegisterFrm() {
-        fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Client/Register.fxml"));
     }
 
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        mySocket.setStage(stage);
-
+    public void openScene() {
+        Platform.runLater(() -> {
         try {
-            Scene scene = new Scene(fxmlLoader.load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Register.fxml"));
+            Scene scene = new Scene(loader.load());
             mySocket.setRegisterScene(scene);
             
             stage.setScene(scene);
@@ -83,15 +79,11 @@ public class RegisterFrm extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    });
+ }
 
-
-    public void openScene (){
-        launch();
-    }
 
     public void receivedDataProcessing(ObjectWrapper data) {
-        Platform.runLater(() -> {
             TextField usernameTxt = (TextField) mySocket.getRegisterScene().lookup("#username");
             String result = (String) data.getData();
             if (result.equals("false")) {
@@ -107,6 +99,5 @@ public class RegisterFrm extends Application {
                 mySocket.getMainFrm().openScene();
             }
 
-        });
-    }
+        }
 }
