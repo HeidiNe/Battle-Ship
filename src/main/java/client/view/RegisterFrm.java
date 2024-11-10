@@ -1,31 +1,112 @@
 package client.view;
 
-import client.controller.ClientCtr;
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.application.Platform;
+
 import shared.dto.ObjectWrapper;
+import client.controller.ClientCtr;
+import static javafx.application.Application.launch;
+import javafx.scene.control.Label;
+import shared.model.Player;
 
-public class RegisterFrm {
+public class RegisterFrm extends Application {
 
+    private FXMLLoader fxmlLoader;
     private ClientCtr mySocket = ClientCtr.getInstance();
-    private Stage stage = mySocket.getStage();
 
     public RegisterFrm() {
+        fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Client/Register.fxml"));
     }
 
-    public void openScene() {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        mySocket.setStage(stage);
+
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Register.fxml"));
-            Scene scene = new Scene(loader.load());
+            Scene scene = new Scene(fxmlLoader.load());
+            mySocket.setRegisterScene(scene);
+            
             stage.setScene(scene);
             stage.setTitle("Register");
             stage.show();
+
+            // JavaFX UI Controls
+            TextField usernameTxt = (TextField) scene.lookup("#username");
+            PasswordField passwordTxt = (PasswordField) scene.lookup("#password");
+            PasswordField cfpasswordTxt = (PasswordField) scene.lookup("#cfpassword");
+            Button registerBtn = (Button) scene.lookup("#register");
+            Button LoginBtn = (Button) scene.lookup("#loginBtn");
+
+            // Set up click event handlers
+            registerBtn.setOnAction(event -> {
+                // Handle login button click
+                String username = usernameTxt.getText();
+                String password = passwordTxt.getText();
+                String cfpassword = cfpasswordTxt.getText();
+                
+                Label msg = (Label) scene.lookup("#msg");
+                if(username.isEmpty()){
+                    msg.setText("Error: Username is not empty!");
+                    return;
+                }
+                if(password.isEmpty()){
+                    msg.setText("Error: Password is not empty!");
+                    return;
+                }   
+                if(password.compareTo(cfpassword) != 0){
+                    msg.setText("Error: Password and confirm password do not match.");
+                    return;
+                }
+                // Process login logic
+                Player player = new Player();
+                player.setUsername(username);
+                player.setPassword(password);
+                mySocket.sendData(new ObjectWrapper(ObjectWrapper.REGISTER_USER, player));
+            });
+
+            LoginBtn.setOnAction(event -> {
+                if (mySocket.getLoginFrm()== null) {
+                    LoginFrm loginFrm = new LoginFrm();
+                    mySocket.setLoginFrm(loginFrm);
+                }
+                mySocket.getLoginFrm().openScene();
+            });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
+    public void openScene (){
+        launch();
+    }
+
     public void receivedDataProcessing(ObjectWrapper data) {
+        Platform.runLater(() -> {
+            TextField usernameTxt = (TextField) mySocket.getRegisterScene().lookup("#username");
+            String result = (String) data.getData();
+            if (result.equals("false")) {
+                Label msg = (Label) mySocket.getRegisterScene().lookup("#msg");
+                msg.setText("Error: Account already exists.");
+            } else {
+                mySocket.setUsername(usernameTxt.getText());
+                mySocket.sendData(new ObjectWrapper(ObjectWrapper.LOGIN_SUCCESSFUL, mySocket.getUsername()));
+                if (mySocket.getMainFrm() == null) {
+                    MainFrm mainFrm = new MainFrm();
+                    mySocket.setMainFrm(mainFrm);
+                }
+                mySocket.getMainFrm().openScene();
+            }
+
+        });
     }
 }

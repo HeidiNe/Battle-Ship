@@ -154,8 +154,9 @@ public class ConnectFrm extends javax.swing.JFrame {
                 LoginFrm loginFrm = new LoginFrm();
                 myControl.setLoginFrm(loginFrm);
             }
-
             myControl.getLoginFrm().openScene();
+
+            
         } else {
             resetClient();
         }
