@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="516.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="244.0" layoutY="216.0" text="History" />
+      <VBox layoutX="104.0" layoutY="93.0" prefHeight="309.0" prefWidth="476.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <HBox prefHeight="44.0" prefWidth="460.0">
+               <children>
+                  <Label prefHeight="44.0" prefWidth="39.0" text="#" />
+                  <Label prefHeight="44.0" prefWidth="161.0" text="OPPONENT" />
+                  <Label prefHeight="44.0" prefWidth="89.0" text="TIME" />
+                  <Label prefHeight="44.0" prefWidth="68.0" text="RESULT" />
+                  <Label prefHeight="44.0" prefWidth="118.0" text="POINT OF CHANGE" />
+               </children>
+            </HBox>
+            <ScrollPane prefHeight="265.0" prefWidth="476.0">
+               <content>
+                  <VBox fx:id="VboxHistory" prefHeight="77.0" prefWidth="460.0">
+                     <children>
+                        <HBox prefHeight="44.0" prefWidth="460.0">
+                           <children>
+                              <Label prefHeight="44.0" prefWidth="39.0" text="#" />
+                              <Label prefHeight="44.0" prefWidth="161.0" text="OPPONENT" />
+                              <Label prefHeight="44.0" prefWidth="89.0" text="TIME" />
+                              <Label prefHeight="44.0" prefWidth="68.0" text="RESULT" />
+                              <Label prefHeight="44.0" prefWidth="103.0" text="POINT OF CHANGE" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

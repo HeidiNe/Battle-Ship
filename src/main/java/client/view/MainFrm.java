@@ -15,11 +15,15 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import shared.dto.ObjectWrapper;
 import javafx.application.Platform;
+import shared.dto.PlayerHistory;
+import shared.model.Match;
 import shared.model.Player;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 
 public class MainFrm {
@@ -66,12 +70,20 @@ public class MainFrm {
                 history.setVisible(false);
                 ranked.setVisible(false);
 
+                btnHome.setStyle("-fx-text-fill: rgba(29, 43, 35, 0.9);");
+                btnHistory.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
+                btnRanked.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
+
                 // Xu ly su kien click vao button Home
                 btnHome.setOnAction(event -> {
                     try {
                         home.setVisible(true);
                         history.setVisible(false);
                         ranked.setVisible(false);
+
+                        btnHome.setStyle("-fx-text-fill: rgba(29, 43, 35, 0.9);");
+                        btnHistory.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
+                        btnRanked.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -83,6 +95,12 @@ public class MainFrm {
                         home.setVisible(false);
                         history.setVisible(true);
                         ranked.setVisible(false);
+
+                        btnHome.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
+                        btnHistory.setStyle("-fx-text-fill: rgba(29, 43, 35, 0.9);");
+                        btnRanked.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
+
+                        mySocket.sendData(new ObjectWrapper(ObjectWrapper.GET_HISTORY));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -94,6 +112,12 @@ public class MainFrm {
                         home.setVisible(false);
                         history.setVisible(false);
                         ranked.setVisible(true);
+
+                        btnHome.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
+                        btnHistory.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
+                        btnRanked.setStyle("-fx-text-fill: rgba(29, 43, 35, 0.9);");
+
+                        mySocket.sendData(new ObjectWrapper(ObjectWrapper.GET_RANKING));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -196,7 +220,7 @@ public class MainFrm {
                                             mySocket.sendData(new ObjectWrapper(ObjectWrapper.SEND_PLAY_REQUEST, player.getUsername()));
                                         });
                                     }
-                                    if (player.getStatus().equals("In Game")) lblStatus.setText("In Game");
+                                    else lblStatus.setText("In Game");
                                     break;
 
                                 }
@@ -251,9 +275,86 @@ public class MainFrm {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    break;
+
+                case ObjectWrapper.SERVER_SEND_HISTORY:
+                    PlayerHistory playerHistory = (PlayerHistory) data.getData();
+                    List<Match> listMatch = playerHistory.getListMatch();
+
+                    VBox vboxHistory = (VBox) scene.lookup("#VboxHistory");
+                    vboxHistory.getChildren().clear();
+
+                    // Tạo formatter theo định dạng dd/MM/yyyy HH:mm:ss
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+                    int index = 1;
+                    for(Match match : listMatch) {
+                        FXMLLoader itemHistoryLoad = new FXMLLoader(getClass().getResource("/Fxml/Client/ItemHistory.fxml"));
+                        try {
+                            HBox itemHistory = itemHistoryLoad.load();
+                            Label lblSTT = (Label) itemHistory.getChildren().getFirst();
+                            Label lblOpponent = (Label) itemHistory.getChildren().get(1);
+                            Label lblTime = (Label) itemHistory.getChildren().get(2);
+                            Label lblResult = (Label) itemHistory.getChildren().get(3);
+                            Label lblPointChange = (Label) itemHistory.getChildren().get(4);
+
+                            lblSTT.setText(String.valueOf(index));
+                            lblOpponent.setText(match.getUser2Username());
+                            lblTime.setText(String.valueOf(match.getTimestamp().format(formatter)));
+                            lblResult.setText(match.getResultUser1());
+                            lblPointChange.setText(String.valueOf(match.getPointsChangeUser1()));
+
+                            index++;
+                            vboxHistory.getChildren().add(itemHistory);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
                     break;
-                case ObjectWrapper.SERVER_SEND_PLAY_REQUEST_ERROR:
+                case ObjectWrapper.SERVER_SEND_RANKING:
+                    List<PlayerHistory> leaderboard = (List<PlayerHistory>) data.getData();
+
+                    VBox vboxRanked = (VBox) scene.lookup("#VboxRanked");
+                    vboxRanked.getChildren().clear();
+
+                    int i = 1;
+                    for(PlayerHistory playerRank : leaderboard) {
+                        FXMLLoader itemRankedLoad = new FXMLLoader(getClass().getResource("/Fxml/Client/ItemRank.fxml"));
+                        try {
+                            HBox itemRanked = itemRankedLoad.load();
+                            Label lblStt = (Label) itemRanked.getChildren().getFirst();
+                            Label lblPlayers = (Label) itemRanked.getChildren().get(1);
+                            Label lblWins = (Label) itemRanked.getChildren().get(2);
+                            Label lblLosses = (Label) itemRanked.getChildren().get(3);
+                            Label lblDraws = (Label) itemRanked.getChildren().get(4);
+                            Label lblAFKs = (Label) itemRanked.getChildren().get(5);
+                            Label lplPoints = (Label) itemRanked.getChildren().get(6);
+                            Label lblRank = (Label) itemRanked.getChildren().get(7);
+
+                            lblStt.setText(String.valueOf(i));
+                            lblPlayers.setText(playerRank.getUsername());
+                            lblWins.setText(String.valueOf(playerRank.getTotalWins()));
+                            lblLosses.setText(String.valueOf(playerRank.getTotalLosses()));
+                            lblDraws.setText(String.valueOf(playerRank.getTotalDraw()));
+                            lblAFKs.setText(String.valueOf(playerRank.getTotalAfk()));
+                            lplPoints.setText(String.valueOf(playerRank.getPoints()));
+                            lblRank.setText(String.valueOf(playerRank.getRanking()));
+                            i++;
+
+                            vboxRanked.getChildren().add(itemRanked);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    break;
+
+                case ObjectWrapper.SERVER_SET_GAME_READY:
+                    System.out.println("SERVER_SEND_PLAY_REQUEST_ERROR");
+                    break;
+
+
+
 
             }
         });

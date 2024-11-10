@@ -2,23 +2,26 @@ package client.view;
 
 import client.controller.ClientCtr;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import shared.dto.ObjectWrapper;
 
-public class SetShipFrm extends Application {
+public class SetShipFrm {
 
     FXMLLoader fxmlLoader;
 
-    @Override
-    public void start(Stage stage) throws Exception {
+    public void openScene() {
+        Platform.runLater(() -> {
+
+        });
 
     }
-
-    public static void openScene() {
-        launch();
-    }
-
     public void receivedDataProcessing(ObjectWrapper data) {
     }
 }
