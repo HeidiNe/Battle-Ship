@@ -350,11 +350,12 @@ public class MainFrm {
                     break;
 
                 case ObjectWrapper.SERVER_SET_GAME_READY:
-                    System.out.println("SERVER_SEND_PLAY_REQUEST_ERROR");
+                    if (mySocket.getSetShipFrm() == null) {
+                        SetShipFrm setShipFrm = new SetShipFrm();
+                        mySocket.setSetShipFrm(setShipFrm);
+                    }
+                    mySocket.getSetShipFrm().openScene();
                     break;
-
-
-
 
             }
         });
