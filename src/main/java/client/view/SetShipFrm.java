@@ -402,39 +402,42 @@ public class SetShipFrm extends Application {
 
         return timelineWrapper[0]; // Trả về Timeline để có thể điều khiển từ bên ngoài
     }
-//    public void receivedDataProcessing(ObjectWrapper data) {
-//        Platform.runLater(() -> {
-//            switch (data.getPerformative()) {
-//                case ObjectWrapper.SERVER_RANDOM_NOT_TURN:
-//                    playerTurn = false;
-//                    break;
-//                case ObjectWrapper.SERVER_RANDOM_TURN:
-//                    playerTurn = true;
-//                    break;
-//                case ObjectWrapper.SERVER_REQUEST_READY_GAME:
-//                    System.out.println("Frm: Người này chưa xếp xong");
-//                    random();
-//                    ready();
-//                    break;
-//                case ObjectWrapper.SERVER_START_PLAY_GAME:
+    public void receivedDataProcessing(ObjectWrapper data) {
+        Platform.runLater(() -> {
+            switch (data.getPerformative()) {
+                case ObjectWrapper.SERVER_RANDOM_NOT_TURN:
+                    playerTurn = false;
+                    break;
+                case ObjectWrapper.SERVER_RANDOM_TURN:
+                    playerTurn = true;
+                    break;
+                case ObjectWrapper.SERVER_REQUEST_READY_GAME:
+                    random();
+                    ready();
+                    break;
+                case ObjectWrapper.SERVER_START_PLAY_GAME:
 //                    PlayFrm playFrm = new PlayFrm(mySocket, playerTurn, shipsLocation);
 //                    mySocket.setPlayFrm(playFrm);
 //
 //                    mySocket.getPlayFrm().setVisible(true);
 //                    this.dispose();
-//                    break;
-//                case ObjectWrapper.SERVER_TRANSFER_QUIT_WHEN_SET_SHIP:
-//    //                timeTask.cancel();
-//                    timer.cancel();
-//                    JOptionPane.showMessageDialog(this, "Đối thủ của bạn đã rời đi, nhấn OK để xem kết quả", "Kết thúc trận đấu", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                case ObjectWrapper.SERVER_TRANSFER_QUIT_WHEN_SET_SHIP:
+                    TimeCD.stop();
+                    
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Kết thúc trận đấu");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Đối thủ của bạn đã rời đi, nhấn OK để xem kết quả");
+                    alert.showAndWait();
 //                    ResultFrm resultFrm = new ResultFrm(mySocket);
 //                    mySocket.setResultFrm(resultFrm);
-//
+
 //                    mySocket.getResultFrm().setVisible(true);
 //                    this.dispose();
-//                    break;
-//            }
-//        });
-//    }
+                    break;
+            }
+        });
+    }
 
 }
