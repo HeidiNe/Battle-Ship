@@ -5,6 +5,7 @@ import server.network.ServerProcessing;
 import server.view.ServerMainFrm;
 import shared.dto.IPAddress;
 import shared.dto.ObjectWrapper;
+import shared.model.Player;
 
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -91,13 +92,18 @@ public class ServerCtr {
     }
 
     public void sendWaitingList() {
-        String listUsername = "";
+        ArrayList<Player> listUsername = new ArrayList<>();
+        System.out.println("myProcess: " + myProcess.size());
         for (ServerProcessing sp : myProcess) {
-            if (!sp.isInGame() && sp.isIsOnline()) {
-                listUsername += sp.getUsername() + "||";
-                System.out.println(sp.getUsername());
+            if(sp.isIsOnline()){
+                Player player = sp.getPlayer();
+                if(sp.isInGame()) player.setStatus("In game");
+                else player.setStatus("Online");
+                listUsername.add(player);
+
             }
         }
+        System.out.println("listUsername: " + listUsername.size());
 
         System.out.println("Server send waiting list:");
         System.out.println(listUsername);
@@ -105,7 +111,9 @@ public class ServerCtr {
         System.out.println(data);
         for (ServerProcessing sp : myProcess) {
             sp.sendData(data);
+            System.out.println("Send to: " + sp.getPlayer().getUsername());
         }
+
     }
 
 }

@@ -278,6 +278,11 @@ public class ServerProcessing extends Thread {
                             List<PlayerHistory> leaderboard = playerDAO.getLeaderboard();
                             sendData(new ObjectWrapper(ObjectWrapper.SERVER_SEND_RANKING, leaderboard));
                             break;
+
+                        case ObjectWrapper.GET_ALL_USER:
+                            ArrayList<Player> allUser = playerDAO.getAllUser();
+                            sendData(new ObjectWrapper(ObjectWrapper.SERVER_SEND_ALL_USER, allUser));
+                            break;
                     }
 
                 }
@@ -325,6 +330,11 @@ public class ServerProcessing extends Thread {
 
     public String getUsername() {
         return username;
+    }
+
+    public Player getPlayer() {
+        PlayerDAO playerDAO = new PlayerDAO();
+        return playerDAO.getPlayer(username);
     }
 
     public ServerProcessing getEnemy() {

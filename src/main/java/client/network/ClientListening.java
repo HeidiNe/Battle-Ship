@@ -42,10 +42,10 @@ public class ClientListening extends Thread {
                                 }
                                 break;
                             case ObjectWrapper.SERVER_SEND_HISTORY:
-                                clientCtr.getHistoryFrm().receivedDataProcessing(data);
+                                clientCtr.getMainFrm().receivedDataProcessing(data);
                                 break;
                             case ObjectWrapper.SERVER_SEND_RANKING:
-                                clientCtr.getRankingFrm().receivedDataProcessing(data);
+                                clientCtr.getMainFrm().receivedDataProcessing(data);
                                 break;
                             case ObjectWrapper.RECEIVE_PLAY_REQUEST:
                                 clientCtr.getMainFrm().receivedDataProcessing(data);
@@ -92,6 +92,9 @@ public class ClientListening extends Thread {
                                 break;
                             case ObjectWrapper.SERVER_TRANSFER_QUIT_WHEN_PLAY:
                                 clientCtr.getPlayFrm().receivedDataProcessing(data);
+                                break;
+                            case ObjectWrapper.SERVER_SEND_ALL_USER:
+                                clientCtr.getMainFrm().receivedDataProcessing(data);
                                 break;
                         }
 
