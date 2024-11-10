@@ -26,16 +26,16 @@ public class ShipGenerator {
                 if (toss()) {
                     int l = (int) (Math.random() * 10);
                     int n = (int) (Math.random() * (10 - i));
-                    currentShip[0] = l + "" + n;
+                    currentShip[0] = n + "" + l;
                     for (int j = 1; j < i; j++) {
-                        currentShip[j] = l + "" + (n + j);
+                        currentShip[j] = (n + j) + "" + l;
                     }
                 } else {
                     int l = (int) (Math.random() * (10 - i));
                     int n = (int) (Math.random() * (10));
-                    currentShip[0] = l + "" + n;
+                    currentShip[0] = n + "" + l;
                     for (int j = 1; j < i; j++) {
-                        currentShip[j] = (l + j) + "" + n;
+                        currentShip[j] = n + "" +(l + j) ;
                     }
                 }
                 for (String s : currentShip) {

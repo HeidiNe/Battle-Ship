@@ -150,12 +150,17 @@ public class ConnectFrm extends javax.swing.JFrame {
 
             System.out.println("khong can reset");
 
-            if (myControl.getLoginFrm() == null) {
-                LoginFrm loginFrm = new LoginFrm();
-                myControl.setLoginFrm(loginFrm);
+//            if (myControl.getLoginFrm() == null) {
+//                LoginFrm loginFrm = new LoginFrm();
+//                myControl.setLoginFrm(loginFrm);
+//            }
+//            myControl.getLoginFrm().openScene();
+            if (myControl.getSetShipFrm()== null) {
+                SetShipFrm SetShip = new SetShipFrm();
+                myControl.setSetShipFrm(SetShip);
             }
-
-            myControl.getLoginFrm().openScene();
+            myControl.getSetShipFrm().openScene();
+            
         } else {
             resetClient();
         }

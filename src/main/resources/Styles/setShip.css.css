@@ -1,0 +1,13 @@
+/* CSS cho ô trong GridPane */
+.grid-cell {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-background-color: lightblue; /* Màu nền cho ô */
+}
+.ship-stack {
+    -fx-background-color: lightblue;
+}
+.title-ship-stack{
+    -fx-background-color: lightblue;
+}
