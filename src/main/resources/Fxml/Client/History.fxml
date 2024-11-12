@@ -4,36 +4,26 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="516.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="104.0" layoutY="93.0" prefHeight="309.0" prefWidth="476.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+      <VBox layoutX="104.0" layoutY="93.0" maxWidth="476.0" minWidth="476.0" prefHeight="403.0" prefWidth="476.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" stylesheets="@../../Styles/History.css">
          <children>
-            <HBox prefHeight="44.0" prefWidth="460.0">
+            <HBox maxHeight="44.0" maxWidth="476.0" minHeight="44.0" minWidth="476.0" prefHeight="44.0" prefWidth="476.0">
                <children>
-                  <Label prefHeight="44.0" prefWidth="39.0" text="#" />
-                  <Label prefHeight="44.0" prefWidth="161.0" text="OPPONENT" />
-                  <Label prefHeight="44.0" prefWidth="89.0" text="TIME" />
-                  <Label prefHeight="44.0" prefWidth="68.0" text="RESULT" />
-                  <Label prefHeight="44.0" prefWidth="118.0" text="POINT OF CHANGE" />
+                  <Label prefHeight="44.0" prefWidth="39.0" text="#" styleClass="title-lable"/>
+                  <Label prefHeight="44.0" prefWidth="161.0" text="OPPONENT" styleClass="title-lable-name"/>
+                  <Label prefHeight="44.0" prefWidth="143.0" text="TIME" styleClass="title-lable-name"/>
+                  <Label prefHeight="44.0" prefWidth="71.0" text="RESULT" styleClass="title-lable-name"/>
+                  <Label prefHeight="44.0" prefWidth="59.0" text="POINT" styleClass="title-lable-name"/>
                </children>
             </HBox>
-            <ScrollPane prefHeight="265.0" prefWidth="476.0">
+            <Pane maxHeight="1.0" minHeight="1.0" prefHeight="1.0" prefWidth="200.0" />
+            <ScrollPane maxWidth="476.0" minWidth="476.0" prefHeight="363.0" prefWidth="476.0">
                <content>
-                  <VBox fx:id="VboxHistory" prefHeight="77.0" prefWidth="460.0">
-                     <children>
-                        <HBox prefHeight="44.0" prefWidth="460.0">
-                           <children>
-                              <Label prefHeight="44.0" prefWidth="39.0" text="#" />
-                              <Label prefHeight="44.0" prefWidth="161.0" text="OPPONENT" />
-                              <Label prefHeight="44.0" prefWidth="89.0" text="TIME" />
-                              <Label prefHeight="44.0" prefWidth="68.0" text="RESULT" />
-                              <Label prefHeight="44.0" prefWidth="103.0" text="POINT OF CHANGE" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="VboxHistory" prefHeight="85.0" prefWidth="460.0" />
                </content>
             </ScrollPane>
          </children>

@@ -1,0 +1,51 @@
+.lblItemUserHistory{
+    --fx-background-color: rgba(255, 23, 23, 0);
+    -fx-text-fill: rgba(221, 244, 21, 0.7);
+
+    -fx-font-weight: 700;
+}
+
+.lblItemHistory{
+    --fx-background-color: rgba(255, 23, 23, 0);
+    -fx-text-fill: rgba(217, 223, 165, 0.7);
+    -fx-font-size: 13px;
+    -fx-font-family: JejuHallasan;
+    -fx-font-weight: 500;
+}
+
+.lblItemSttHistory{
+    -fx-background-color: rgba(255, 23, 23, 0);
+    -fx-text-fill: rgba(217, 223, 165, 0.7);
+    -fx-font-size: 13px;
+    -fx-font-family: JejuHallasan;
+    -fx-font-weight: 500;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.hBox-ItemHistory{
+    --fx-background-color: transparent;
+}
+
+.hBox-ItemHistory:hover{
+    -fx-background-color: rgba(146, 250, 250, 0.2);
+}
+
+.line{
+    -fx-background-color: rgb(151, 135, 135);
+}
+
+.title-lable{
+    -fx-text-fill: rgba(237, 101, 101, 0.5);
+    -fx-font-size: 15px;
+    -fx-font-family: JejuHallasan;
+    -fx-font-weight: 700;
+    -fx-alignment: center;
+}
+
+.title-lable-name{
+    -fx-text-fill: rgba(237, 101, 101, 0.5);
+    -fx-font-size: 15px;
+    -fx-font-family: JejuHallasan;
+    -fx-font-weight: 700;
+}

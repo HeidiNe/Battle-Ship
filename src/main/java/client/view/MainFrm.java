@@ -11,30 +11,37 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import kotlin.Pair;
 import shared.dto.ObjectWrapper;
 import javafx.application.Platform;
 import shared.dto.PlayerHistory;
 import shared.model.Match;
 import shared.model.Player;
 
+import java.io.File;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 public class MainFrm {
 
     private ClientCtr mySocket = ClientCtr.getInstance();
     private Stage stage = mySocket.getStage();
+    MediaPlayer backgroundMusicPlayer;
 
     public MainFrm() {
     }
 
     public void openScene() {
+        // Khởi tạo âm thanh trước
+        initializeBackgroundMusic();
+
+        // Sau đó xử lý UI trong Platform.runLater
         Platform.runLater(() -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Main.fxml"));
@@ -70,9 +77,9 @@ public class MainFrm {
                 history.setVisible(false);
                 ranked.setVisible(false);
 
-                btnHome.setStyle("-fx-text-fill: rgba(29, 43, 35, 0.9);");
-                btnHistory.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
-                btnRanked.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
+                btnHome.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);");
+                btnHistory.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
+                btnRanked.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
 
                 // Xu ly su kien click vao button Home
                 btnHome.setOnAction(event -> {
@@ -81,9 +88,10 @@ public class MainFrm {
                         history.setVisible(false);
                         ranked.setVisible(false);
 
-                        btnHome.setStyle("-fx-text-fill: rgba(29, 43, 35, 0.9);");
-                        btnHistory.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
-                        btnRanked.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
+                        btnHome.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);");
+                        btnHistory.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
+                        btnRanked.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -96,9 +104,9 @@ public class MainFrm {
                         history.setVisible(true);
                         ranked.setVisible(false);
 
-                        btnHome.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
-                        btnHistory.setStyle("-fx-text-fill: rgba(29, 43, 35, 0.9);");
-                        btnRanked.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
+                        btnHome.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
+                        btnHistory.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);");
+                        btnRanked.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
 
                         mySocket.sendData(new ObjectWrapper(ObjectWrapper.GET_HISTORY));
                     } catch (Exception e) {
@@ -113,9 +121,9 @@ public class MainFrm {
                         history.setVisible(false);
                         ranked.setVisible(true);
 
-                        btnHome.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
-                        btnHistory.setStyle("-fx-text-fill: rgba(44, 64, 53, 0.7);");
-                        btnRanked.setStyle("-fx-text-fill: rgba(29, 43, 35, 0.9);");
+                        btnHome.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
+                        btnHistory.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
+                        btnRanked.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);");
 
                         mySocket.sendData(new ObjectWrapper(ObjectWrapper.GET_RANKING));
                     } catch (Exception e) {
@@ -142,6 +150,7 @@ public class MainFrm {
 
                     ArrayList<Player> listUser = (ArrayList<Player>) data.getData();
                     listUser.sort((o1, o2) -> o1.getUsername().compareTo(o2.getUsername()));
+
 
                     int numberUser = listUser.size();
                     System.out.println("numberUser: " + numberUser);
@@ -183,50 +192,86 @@ public class MainFrm {
                     break;
 
                 case ObjectWrapper.SERVER_INFORM_CLIENT_WAITING:
-                // cap nhat status cua user
+                    // cap nhat status cua user
                     ArrayList<Player> listUserWaiting = (ArrayList<Player>) data.getData();
                     ArrayList<HBox> listUserItem = new ArrayList<>();
                     VBox screnListUserWaiting = (VBox) scene.lookup("#listUerVbox");
 
+
+                    HashMap<String, String> mapUserStatus = new HashMap<>();
+                    ArrayList<String> listUserStatus = new ArrayList<>();
+
+                    // dua cac user co o giao dien vao trong hashmap
                     for (int i = 0; i < screnListUserWaiting.getChildren().size(); i++) {
                         // lay ra item user
                         HBox itemUser = (HBox) screnListUserWaiting.getChildren().get(i);
                         AnchorPane anchorPane = (AnchorPane) itemUser.getChildren().getFirst();
                         Label lblUserName = (Label) anchorPane.lookup("#usernameItem");
-                        Label lblStatus = (Label) anchorPane.lookup("#statusItem");
-                        Circle circleStatus = (Circle) anchorPane.lookup("#circleStatus");
-                        Button btnInvite = (Button) itemUser.lookup("#buttonInvite");
 
-                        if(lblUserName == null) {
-                            System.out.println("lblUserName is null");
-                        } else {
-                            // dat mac dinh la offline
-                            lblStatus.setText("Offline");
-                            circleStatus.setStyle("-fx-stroke: #262825");
-                            listUserItem.add(itemUser);
-                            btnInvite.setVisible(false);
+                        // dua vao trong map va list
+                        listUserStatus.add(lblUserName.getText());
+                        mapUserStatus.put(lblUserName.getText(), "Offline");
 
-                            // Cat nhat lai online hoac in game
-                            for (Player player : listUserWaiting) {
-                                if (lblUserName.getText().equals(player.getUsername())) {
-                                    circleStatus.setStyle("-fx-stroke: #00ff00");
-                                    lblStatus.setStyle("-fx-text-fill: #4a8f4a");
-                                    if(player.getStatus().equals("Online")) {
+                    }
 
-                                        lblStatus.setText("Online");
-                                        btnInvite.setVisible(true);
 
-                                        btnInvite.setOnAction(event -> {
-                                            mySocket.sendData(new ObjectWrapper(ObjectWrapper.SEND_PLAY_REQUEST, player.getUsername()));
-                                        });
-                                    }
-                                    else lblStatus.setText("In Game");
-                                    break;
+                    // Cap nhat lai trang thai cua cua user
+                    // Kiem tra xem co user moi nao khong (truong hop co user nao do moi tao tai khoan nen khong biet)
+                    for (Player player : listUserWaiting) {
+                        if (!mapUserStatus.containsKey(player.getUsername()) && !player.getUsername().equals(mySocket.getUsername())) listUserStatus.add(player.getUsername());
 
-                                }
+                        if(player.getStatus().equals("Online")) mapUserStatus.put(player.getUsername(), "Online");
+                        else mapUserStatus.put(player.getUsername(), "In Game");
+                    }
+
+                    // sort user theo status, name
+                    listUserStatus.sort((o1, o2) -> {
+                        String status01 = mapUserStatus.get(o1);
+                        String status02 = mapUserStatus.get(o2);
+                        if (status01.equals(status02)) return o1.compareTo(o2);
+                        if(status01.equals("Online")) return -1;
+                        if(status01.equals("In Game") && status02.equals("Offline")) return -1;
+                        return 1;
+                    });
+
+                    // cap nhat lai giao dien
+                    screnListUserWaiting.getChildren().clear();
+                    for (String namePlayer : listUserStatus){
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/ItemUser.fxml"));
+                        try {
+                            HBox itemUser = loader.load();
+                            Label lblUserName = (Label) loader.getNamespace().get("usernameItem");
+                            Label lblStatus = (Label) loader.getNamespace().get("statusItem");
+                            Circle circleStatus = (Circle) loader.getNamespace().get("circleStatus");
+                            Button btnInvite = (Button) itemUser.lookup("#buttonInvite");
+
+                            lblUserName.setText(namePlayer);
+                            lblStatus.setText(mapUserStatus.get(namePlayer));
+
+                            if(mapUserStatus.get(namePlayer).equals("Online")) {
+                                circleStatus.setStyle("-fx-stroke: #00ff00");
+                                lblStatus.setStyle("-fx-text-fill: #4a8f4a");
+                                btnInvite.setVisible(true);
+
+                                btnInvite.setOnAction(event -> {
+                                    mySocket.sendData(new ObjectWrapper(ObjectWrapper.SEND_PLAY_REQUEST, namePlayer));
+                                });
+                            } else if(mapUserStatus.get(namePlayer).equals("In Game")) {
+                                circleStatus.setStyle("-fx-stroke: #584ee6");
+                                lblStatus.setStyle("-fx-text-fill: #302a8a");
+                                btnInvite.setVisible(false);
                             }
+                            else {
+                                circleStatus.setStyle("-fx-stroke: #4f4f50");
+                                lblStatus.setStyle("-fx-text-fill: #a3a3a3");
+                                btnInvite.setVisible(false);
+                            }
+                            screnListUserWaiting.getChildren().add(itemUser);
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
+
                     break;
                 case ObjectWrapper.RECEIVE_PLAY_REQUEST:
                     String username = (String) data.getData();
@@ -291,7 +336,8 @@ public class MainFrm {
                     for(Match match : listMatch) {
                         FXMLLoader itemHistoryLoad = new FXMLLoader(getClass().getResource("/Fxml/Client/ItemHistory.fxml"));
                         try {
-                            HBox itemHistory = itemHistoryLoad.load();
+                            VBox vBox = itemHistoryLoad.load();
+                            HBox itemHistory = (HBox) vBox.getChildren().getFirst();
                             Label lblSTT = (Label) itemHistory.getChildren().getFirst();
                             Label lblOpponent = (Label) itemHistory.getChildren().get(1);
                             Label lblTime = (Label) itemHistory.getChildren().get(2);
@@ -355,9 +401,33 @@ public class MainFrm {
                         mySocket.setSetShipFrm(setShipFrm);
                     }
                     mySocket.getSetShipFrm().openScene();
+                    backgroundMusicPlayer.stop();
                     break;
 
             }
         });
+
+    }
+
+    public void initializeBackgroundMusic(){
+        // tao am thanh nen
+        String backgroundMusicFile = new File("src/main/resources/Sounds/backgroundMusic.mp3").toURI().toString();
+        Media backgroundMusic = new Media(backgroundMusicFile);
+        backgroundMusicPlayer = new MediaPlayer(backgroundMusic);
+
+        backgroundMusicPlayer.setVolume(0.2);
+        backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+        // Thêm error handler
+        backgroundMusicPlayer.setOnError(() -> {
+            System.out.println("Media error occurred: " + backgroundMusicPlayer.getError());
+        });
+
+        // Thêm status listener để debug
+        backgroundMusicPlayer.statusProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Status changed from " + oldValue + " to " + newValue);
+        });
+
+        backgroundMusicPlayer.play();
     }
 }
