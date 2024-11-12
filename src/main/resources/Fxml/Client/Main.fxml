@@ -13,88 +13,70 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="773.0" stylesheets="@../../Styles/Main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="516.0" maxWidth="776.0" minHeight="516.0" minWidth="776.0" prefHeight="516.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="516.0" prefWidth="525.0">
+      <ImageView fitHeight="516.0" fitWidth="809.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/background.gif" />
+         </image>
+      </ImageView>
+      <HBox maxHeight="516.0" maxWidth="776.0" minHeight="516.0" minWidth="776.0" prefHeight="516.0" prefWidth="776.0" stylesheets="@../../Styles/Main.css">
          <children>
-            <HBox prefHeight="65.0" prefWidth="517.0">
+            <VBox maxHeight="516.0" maxWidth="525.0" minHeight="516.0" minWidth="525.0" prefHeight="516.0" prefWidth="525.0">
                <children>
-                  <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="65.0" prefWidth="105.0" styleClass="menu-button-main" text="HOME" />
-                  <Button fx:id="btnHistory" mnemonicParsing="false" prefHeight="65.0" prefWidth="130.0" styleClass="menu-button-main" text="MATCH HISTORY" />
-                  <Button fx:id="btnRanked" mnemonicParsing="false" prefHeight="65.0" prefWidth="133.0" styleClass="menu-button-main" text="RANKED" />
-               </children>
-            </HBox>
-            <Pane prefHeight="1.0" prefWidth="295.0" styleClass="line-vbox" />
-            <StackPane fx:id="stackPane" prefHeight="449.0" prefWidth="516.0" />
-         </children>
-      </VBox>
-      <VBox prefHeight="516.0" prefWidth="265.0" styleClass="vbox-user">
-         <children>
-            <AnchorPane prefHeight="65.0" prefWidth="257.0">
-               <children>
-                  <Circle fill="#262825" layoutX="37.0" layoutY="33.0" radius="23.0" stroke="#40db0d" strokeType="INSIDE" strokeWidth="2.0" styleClass="info-userMain" AnchorPane.leftAnchor="14.0" />
-                  <VBox layoutX="69.0" layoutY="10.0" prefHeight="46.0" prefWidth="174.0" AnchorPane.leftAnchor="69.0" AnchorPane.topAnchor="10.0">
+                  <HBox maxWidth="65.0" minHeight="65.0" minWidth="525.0" prefHeight="65.0" prefWidth="525.0">
                      <children>
-                        <Label fx:id="usernameMain" prefHeight="19.0" prefWidth="173.0" text="Nguyen Minh Thang">
-                           <font>
-                              <Font name="Segoe Script Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label prefHeight="18.0" prefWidth="159.0" text="Online">
-                           <font>
-                              <Font name="Roboto" size="12.0" />
-                           </font>
-                        </Label>
+                        <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="65.0" prefWidth="105.0" styleClass="menu-button-main" text="HOME" />
+                        <Button fx:id="btnHistory" mnemonicParsing="false" prefHeight="65.0" prefWidth="130.0" styleClass="menu-button-main" text="MATCH HISTORY" />
+                        <Button fx:id="btnRanked" mnemonicParsing="false" prefHeight="65.0" prefWidth="133.0" styleClass="menu-button-main" text="RANKED" />
                      </children>
-                  </VBox>
+                  </HBox>
+                  <Pane maxHeight="1.0" maxWidth="525.0" minHeight="1.0" minWidth="525.0" prefHeight="1.0" prefWidth="525.0" styleClass="line-vbox" />
+                  <StackPane fx:id="stackPane" maxHeight="449.0" maxWidth="525.0" minHeight="449.0" minWidth="525.0" prefHeight="449.0" prefWidth="525.0" />
                </children>
-            </AnchorPane>
-            <Pane prefHeight="1.0" prefWidth="295.0" styleClass="line-vbox" />
-            <HBox prefHeight="40.0" prefWidth="295.0" styleClass="title-list-user">
+            </VBox>
+            <VBox maxHeight="516.0" maxWidth="251.0" minHeight="516.0" minWidth="251.0" prefHeight="516.0" prefWidth="251.0" styleClass="vbox-user">
                <children>
-                  <Pane prefHeight="39.0" prefWidth="1.0" styleClass="line-hbox" />
-                  <Label prefHeight="39.0" prefWidth="203.0" text="  Players" />
-                  <Label prefHeight="39.0" prefWidth="60.0" text="Invite" />
-               </children>
-            </HBox>
-            <ScrollPane prefHeight="408.0" prefWidth="257.0">
-               <content>
-                  <VBox fx:id="listUerVbox" prefHeight="399.0" prefWidth="240.0">
+                  <AnchorPane maxHeight="65.0" maxWidth="251.0" minHeight="65.0" minWidth="251.0" prefHeight="65.0" prefWidth="251.0">
                      <children>
-                        <HBox prefHeight="41.0" prefWidth="238.0">
+                        <Circle fill="#c6adad" layoutX="37.0" layoutY="33.0" radius="23.0" stroke="#6ee494" strokeType="INSIDE" strokeWidth="2.0" AnchorPane.leftAnchor="14.0" />
+                        <VBox layoutX="69.0" layoutY="10.0" prefHeight="46.0" prefWidth="174.0" AnchorPane.leftAnchor="69.0" AnchorPane.topAnchor="10.0">
                            <children>
-                              <AnchorPane prefHeight="41.0" prefWidth="206.0">
-                                 <children>
-                                    <Circle fill="#262825" layoutX="23.0" layoutY="21.0" radius="17.0" stroke="#40db0d" strokeType="INSIDE" strokeWidth="2.0" styleClass="info-userMain" />
-                                    <Label layoutX="47.0" layoutY="19.0" prefHeight="24.0" prefWidth="105.0" text="In game">
-                                       <font>
-                                          <Font size="11.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="47.0" layoutY="-1.0" prefHeight="24.0" prefWidth="133.0" text="Vu Xuan Thinh">
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="41.0" prefWidth="67.0">
-                                 <children>
-                                    <Button layoutX="6.0" layoutY="1.0" minWidth="46.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="46.0" styleClass="buttom-check">
-                                       <graphic>
-                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../Images/plus.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </AnchorPane>
-                           </children></HBox>
+                              <Label fx:id="usernameMain" prefHeight="19.0" prefWidth="173.0" styleClass="texhUserMain" text="Nguyen Minh Thang">
+                                 <font>
+                                    <Font name="Segoe Script Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="18.0" prefWidth="159.0" styleClass="blb_status" text="Online">
+                                 <font>
+                                    <Font name="Roboto" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-               </content></ScrollPane>
-         </children></VBox>
+                  </AnchorPane>
+                  <Pane maxHeight="1.0" maxWidth="251.0" minHeight="1.0" minWidth="251.0" prefHeight="1.0" prefWidth="251.0" styleClass="line-vbox" />
+                  <HBox maxHeight="40.0" maxWidth="251.0" minHeight="40.0" minWidth="251.0" prefHeight="40.0" prefWidth="251.0" styleClass="title-list-user">
+                     <children>
+                        <Pane maxWidth="1.0" minWidth="1.0" prefHeight="39.0" prefWidth="1.0" styleClass="line-hbox" />
+                        <Label prefHeight="39.0" prefWidth="197.0" styleClass="text-lable" text="  Players" />
+                        <Label prefHeight="39.0" prefWidth="50.0" styleClass="text-lable" text="Invite" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="listHBox" maxWidth="251.0" minWidth="251.0" prefHeight="100.0" prefWidth="251.0">
+                     <children>
+                        <Pane maxWidth="1.0" minWidth="1.0" prefHeight="39.0" prefWidth="1.0" styleClass="line-hbox" />
+                        <ScrollPane maxHeight="409.0" maxWidth="250.0" minHeight="408.0" minWidth="409.0" prefHeight="409.0" prefWidth="250.0" styleClass="tran">
+                           <content>
+                              <VBox fx:id="listUerVbox" maxWidth="236.0" minWidth="236.0" prefHeight="87.0" prefWidth="236.0" styleClass="tran" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
-</HBox>
+</AnchorPane>

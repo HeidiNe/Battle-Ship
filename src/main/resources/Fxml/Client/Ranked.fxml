@@ -13,29 +13,27 @@
             <HBox prefHeight="44.0" prefWidth="362.0">
                <children>
                   <Label prefHeight="45.0" prefWidth="28.0" text="#" />
-                  <Label prefHeight="44.0" prefWidth="132.0" text="PLAYERS" />
+                  <Label prefHeight="44.0" prefWidth="177.0" text="PLAYERS" />
                   <Label prefHeight="44.0" prefWidth="48.0" text="WINS" />
                   <Label prefHeight="44.0" prefWidth="56.0" text="LOSSES" />
                   <Label prefHeight="44.0" prefWidth="56.0" text="DRAWS" />
                   <Label prefHeight="44.0" prefWidth="50.0" text="AFKS" />
                   <Label prefHeight="44.0" prefWidth="56.0" text="POINTS" />
-                  <Label prefHeight="44.0" prefWidth="50.0" text="RANK" />
                </children>
             </HBox>
             <ScrollPane prefHeight="257.0" prefWidth="356.0">
                <content>
-                  <VBox prefHeight="82.0" prefWidth="460.0">
+                  <VBox fx:id="vboxRanked" prefHeight="82.0" prefWidth="460.0">
                      <children>
                         <HBox prefHeight="44.0" prefWidth="460.0">
                            <children>
                               <Label prefHeight="45.0" prefWidth="28.0" text="#" />
-                              <Label prefHeight="44.0" prefWidth="130.0" text="PLAYERS" />
+                              <Label prefHeight="44.0" prefWidth="180.0" text="PLAYERS" />
                               <Label prefHeight="44.0" prefWidth="48.0" text="WINS" />
                               <Label prefHeight="44.0" prefWidth="56.0" text="LOSSES" />
                               <Label prefHeight="44.0" prefWidth="56.0" text="DRAWS" />
                               <Label prefHeight="44.0" prefWidth="50.0" text="AFKS" />
                               <Label prefHeight="44.0" prefWidth="56.0" text="POINTS" />
-                              <Label prefHeight="44.0" prefWidth="36.0" text="RANK" />
                            </children>
                         </HBox>
                      </children>
