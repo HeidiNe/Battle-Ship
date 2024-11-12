@@ -1,3 +1,7 @@
-.anchor{
-    --fxbackground-color: #070d17;
+.btlNext {
+    -fx-background-color: transparent;
+}
+
+.btlNext:hover {
+    -fx-background-color: transparent;
 }
