@@ -29,26 +29,21 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import shared.model.Player;
 
-public class PlayFrm extends Application {
-
-    private FXMLLoader fxmlLoader;
+public class PlayFrm {
      private Timeline TimeCD;
     private ClientCtr mySocket = ClientCtr.getInstance();
+    private Stage stage = mySocket.getStage();
     private HashSet<Pane> buttonEnemyShooted = new HashSet<>();
     private boolean playerTurn = false;
     private ArrayList<String> shipsLocation = new ArrayList<>(Arrays.asList("00","10","/","32","33","34","/","16","26","36","/","56","57","58","59","/","53","63","73","83","93","/"));
     public PlayFrm() {
-        fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Client/Play.fxml"));
     }
 
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        mySocket.setStage(stage);
+    public void openScene() {
 
         try {
-            Scene scene = new Scene(fxmlLoader.load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/SetShip.fxml"));
+            Scene scene = new Scene(loader.load());
             mySocket.setPlayScene(scene);
             
             // draw grid
@@ -61,7 +56,7 @@ public class PlayFrm extends Application {
             drawMyShips();
             
             stage.setScene(scene);
-            stage.setTitle("Play");
+            stage.setTitle("Set Ship");
             stage.show();
             
             
@@ -250,10 +245,6 @@ public class PlayFrm extends Application {
        return timelineWrapper[0]; // Trả về Timeline để có thể điều khiển từ bên ngoài
    }
     
-    
-    public void openScene (){
-        launch();
-    }
     
     public void receivedDataProcessing(ObjectWrapper data) {
         Platform.runLater(() -> {
