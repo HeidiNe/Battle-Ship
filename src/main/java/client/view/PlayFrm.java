@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
@@ -256,6 +257,7 @@ public class PlayFrm extends Application {
     
     public void receivedDataProcessing(ObjectWrapper data) {
         Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             switch (data.getPerformative()) {
                 case ObjectWrapper.SERVER_TRANSFER_SHOOT_FAILTURE:
                      playSound("missing.wav");
@@ -270,10 +272,10 @@ public class PlayFrm extends Application {
                 case ObjectWrapper.SERVER_TRANSFER_SHOOT_HIT_POINT:
                     playSound("score.wav");
                     if (playerTurn) {
-                        drawMiss((String) data.getData(), "#enemygrid");
+                        drawHit((String) data.getData(), "#enemygrid");
                         startYourTurn();
                     } else {
-                        drawMiss((String) data.getData(), "#mygrid");
+                        drawHit((String) data.getData(), "#mygrid");
                         startEnemyTurn();
                     }
                     break;
@@ -305,8 +307,10 @@ public class PlayFrm extends Application {
                         drawDestroyedShip((String[]) data.getData(), "#mygrid");
                         TimeCD.stop();
                     }
-
-//                    JOptionPane.showMessageDialog(this, "Trận đấu đã kết thúc, nhấn OK để xem kết quả", "Kết thúc trận đấu", JOptionPane.INFORMATION_MESSAGE);
+                    alert.setTitle("Kết thúc trận đấu");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Trận đấu đã kết thúc, nhấn OK để xem kết quả");
+                    alert.showAndWait();
 //                    ResultFrm resultFrm = new ResultFrm(mySocket);
 //                    mySocket.setResultFrm(resultFrm);
 //
@@ -316,8 +320,10 @@ public class PlayFrm extends Application {
                 case ObjectWrapper.SERVER_TRANSFER_END_GAME_DRAW:
                     playSound("draw.wav");
                     TimeCD.stop();
-
-//                    JOptionPane.showMessageDialog(this, "Trận đấu đã kết thúc, nhấn OK để xem kết quả", "Kết thúc trận đấu", JOptionPane.INFORMATION_MESSAGE);
+                    alert.setTitle("Kết thúc trận đấu");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Trận đấu đã kết thúc, nhấn OK để xem kết quả");
+                    alert.showAndWait();
 //                    ResultFrm resultFrm2 = new ResultFrm(mySocket);
 //                    mySocket.setResultFrm(resultFrm2);
 //
@@ -326,7 +332,10 @@ public class PlayFrm extends Application {
                     break;
                 case ObjectWrapper.SERVER_TRANSFER_QUIT_WHEN_PLAY:
                     TimeCD.stop();
-//                    JOptionPane.showMessageDialog(this, "Đối thủ của bạn đã rời đi, nhấn OK để xem kết quả", "Kết thúc trận đấu", JOptionPane.INFORMATION_MESSAGE);
+                    alert.setTitle("Kết thúc trận đấu");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Đối thủ đã rời đi, nhấn OK để xem kết quả");
+                    alert.showAndWait();
 //                    ResultFrm resultFrm1 = new ResultFrm(mySocket);
 //                    mySocket.setResultFrm(resultFrm1);
 //
