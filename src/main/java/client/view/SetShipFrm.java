@@ -1,6 +1,5 @@
 package client.view;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,7 +13,6 @@ import java.util.Optional;
 import java.util.Timer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import static javafx.application.Application.launch;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -40,8 +38,6 @@ public class SetShipFrm {
     private int shipSize; //Kích thước tàu hiện tại được chọn để sắp
     private int shipIndexList; //Vị trí tàu được chọn (trong list) hiện tại trong danh sách tàu
     private boolean horizontal = true;
-    private CountDownTimer timeTask;
-    private Timer timer;
     private ArrayList<String> shipListModel = new ArrayList<>(Arrays.asList("#ship2", "#ship3-1", "#ship3-2", "#ship4", "#ship5"));
     private ArrayList<String> shipsLocation = new ArrayList<>();
     private Timeline TimeCD;
@@ -410,11 +406,11 @@ public class SetShipFrm {
                     ready();
                     break;
                 case ObjectWrapper.SERVER_START_PLAY_GAME:
-//                    PlayFrm playFrm = new PlayFrm(mySocket, playerTurn, shipsLocation);
-//                    mySocket.setPlayFrm(playFrm);
-//
-//                    mySocket.getPlayFrm().setVisible(true);
-//                    this.dispose();
+                    if (mySocket.getPlayFrm()== null) {
+                        PlayFrm playFrm = new PlayFrm(shipsLocation, playerTurn);
+                        mySocket.setPlayFrm(playFrm);
+                    }
+                    mySocket.getPlayFrm().openScene();
                     break;
                 case ObjectWrapper.SERVER_TRANSFER_QUIT_WHEN_SET_SHIP:
                     TimeCD.stop();

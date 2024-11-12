@@ -36,7 +36,9 @@ public class PlayFrm {
     private HashSet<Pane> buttonEnemyShooted = new HashSet<>();
     private boolean playerTurn = false;
     private ArrayList<String> shipsLocation = new ArrayList<>(Arrays.asList("00","10","/","32","33","34","/","16","26","36","/","56","57","58","59","/","53","63","73","83","93","/"));
-    public PlayFrm() {
+    public PlayFrm(ArrayList<String> shipsLocation, boolean playerTurn ) {
+        this.playerTurn = playerTurn;
+        this.shipsLocation = shipsLocation;
     }
 
     public void openScene() {
