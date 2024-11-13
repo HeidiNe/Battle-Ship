@@ -29,6 +29,19 @@
                         <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="65.0" prefWidth="105.0" styleClass="menu-button-main" text="HOME" />
                         <Button fx:id="btnHistory" mnemonicParsing="false" prefHeight="65.0" prefWidth="130.0" styleClass="menu-button-main" text="MATCH HISTORY" />
                         <Button fx:id="btnRanked" mnemonicParsing="false" prefHeight="65.0" prefWidth="133.0" styleClass="menu-button-main" text="RANKED" />
+                        <AnchorPane maxWidth="156.0" minWidth="50.0" prefHeight="65.0" prefWidth="156.0">
+                           <children>
+                              <Button fx:id="btnLogout" layoutX="95.0" layoutY="21.0" minWidth="46.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="46.0" styleClass="menu-button-main">
+                                 <graphic>
+                                    <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../Images/logout.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </HBox>
                   <Pane maxHeight="1.0" maxWidth="525.0" minHeight="1.0" minWidth="525.0" prefHeight="1.0" prefWidth="525.0" styleClass="line-vbox" />
@@ -60,16 +73,24 @@
                   <HBox maxHeight="40.0" maxWidth="251.0" minHeight="40.0" minWidth="251.0" prefHeight="40.0" prefWidth="251.0" styleClass="title-list-user">
                      <children>
                         <Pane maxWidth="1.0" minWidth="1.0" prefHeight="39.0" prefWidth="1.0" styleClass="line-hbox" />
-                        <Label prefHeight="39.0" prefWidth="197.0" styleClass="text-lable" text="  Players" />
+                        <Label prefHeight="39.0" prefWidth="132.0" styleClass="text-lable" text="  Players" />
+                        <Button fx:id="btnRefresh" minWidth="53.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="59.0" styleClass="menu-button-main">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../Images/refresh.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                         <Label prefHeight="39.0" prefWidth="50.0" styleClass="text-lable" text="Invite" />
                      </children>
                   </HBox>
                   <HBox fx:id="listHBox" maxWidth="251.0" minWidth="251.0" prefHeight="100.0" prefWidth="251.0">
                      <children>
                         <Pane maxWidth="1.0" minWidth="1.0" prefHeight="39.0" prefWidth="1.0" styleClass="line-hbox" />
-                        <ScrollPane maxHeight="409.0" maxWidth="250.0" minHeight="408.0" minWidth="409.0" prefHeight="409.0" prefWidth="250.0" styleClass="tran">
+                        <ScrollPane maxHeight="409.0" maxWidth="250.0" minHeight="408.0" minWidth="250.0" prefHeight="408.0" prefWidth="250.0" styleClass="tran">
                            <content>
-                              <VBox fx:id="listUerVbox" maxWidth="236.0" minWidth="236.0" prefHeight="87.0" prefWidth="236.0" styleClass="tran" />
+                              <VBox fx:id="listUerVbox" maxWidth="236.0" minWidth="235.0" prefHeight="54.0" prefWidth="235.0" styleClass="tran" />
                            </content>
                         </ScrollPane>
                      </children>

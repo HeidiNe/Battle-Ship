@@ -44,7 +44,7 @@ public class PlayFrm {
     public void openScene() {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/SetShip.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Play.fxml"));
             Scene scene = new Scene(loader.load());
             mySocket.setPlayScene(scene);
             
@@ -152,14 +152,12 @@ public class PlayFrm {
     }
     private void handleGridClick(MouseEvent e, Pane cell) {
         System.out.println("clicked  "+ cell.getId());
-        String[] tmp = {"32","33","34"};
-        drawDestroyedShip(tmp,"#enemygrid");
         cell.setDisable(true);
         String location = cell.getId();
         buttonEnemyShooted.add(cell);
 
         TimeCD.stop();
-//        mySocket.sendData(new ObjectWrapper(ObjectWrapper.SHOOT_REQUEST, location));
+        mySocket.sendData(new ObjectWrapper(ObjectWrapper.SHOOT_REQUEST, location));
     }
     
     private void drawHit(String position, String idGrid){

@@ -1,8 +1,9 @@
 .lblItemUserHistory{
     --fx-background-color: rgba(255, 23, 23, 0);
     -fx-text-fill: rgba(221, 244, 21, 0.7);
-
+    -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
+    -fx-font-size: 14px;
 }
 
 .lblItemHistory{
@@ -32,11 +33,11 @@
 }
 
 .line{
-    -fx-background-color: rgb(151, 135, 135);
+    -fx-background-color: rgba(248, 13, 13, 0.5);
 }
 
 .title-lable{
-    -fx-text-fill: rgba(237, 101, 101, 0.5);
+    -fx-text-fill: rgba(251, 51, 51, 0.5);
     -fx-font-size: 15px;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
@@ -44,8 +45,56 @@
 }
 
 .title-lable-name{
-    -fx-text-fill: rgba(237, 101, 101, 0.5);
+    -fx-text-fill: rgba(251, 51, 51, 0.5);
     -fx-font-size: 15px;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
+}
+
+/* Style cho toàn bộ ChoiceBox */
+.choice-box {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Style cho mũi tên dropdown */
+.choice-box .arrow {
+    -fx-background-color: transparent;
+}
+
+/* Style cho item được chọn */
+.choice-box .label {
+    -fx-text-fill: #af4848;
+    -fx-font-family: JejuHallasan;
+    -fx-font-weight: 700;
+    -fx-font-size: 24px;
+}
+
+/* Style cho từng item trong dropdown menu */
+.choice-box .menu-item:focused {
+    -fx-background-color: rgba(154, 209, 232, 0.5);
+}
+
+.choice-box .menu-item > .label {
+    -fx-text-fill: #af4848;
+    -fx-font-family: JejuHallasan;
+    -fx-font-weight: 700;
+    -fx-font-size: 24px;
+}
+
+.choice-box .menu-item:focused > .label {
+    -fx-text-fill: #af4848;
+    -fx-font-family: JejuHallasan;
+    -fx-font-weight: 700;
+    -fx-font-size: 24px;
+}
+
+.line-rank {
+    -fx-background-color: linear-gradient(to right,
+        rgba(152, 141, 71, 0.1) 0%,
+        rgba(152, 141, 71, 0.3) 20%,
+        rgba(152, 141, 71, 0.8) 50%,
+        rgba(152, 141, 71, 0.3) 80%,
+        rgba(152, 141, 71, 0.1) 100%
+    );
 }

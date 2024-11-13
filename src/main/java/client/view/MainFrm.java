@@ -1,12 +1,16 @@
 package client.view;
 
 import client.controller.ClientCtr;
+import eu.hansolo.tilesfx.addons.Switch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -38,9 +42,6 @@ public class MainFrm {
     }
 
     public void openScene() {
-        // Khởi tạo âm thanh trước
-        initializeBackgroundMusic();
-
         // Sau đó xử lý UI trong Platform.runLater
         Platform.runLater(() -> {
             try {
@@ -69,15 +70,14 @@ public class MainFrm {
                 AnchorPane history = loaderHistory.load();
                 AnchorPane ranked = loaderRanked.load();
 
-                stackPane.getChildren().add(home);
-                stackPane.getChildren().add(history);
-                stackPane.getChildren().add(ranked);
+                stackPane.getChildren().addAll(home, history, ranked);
 
                 home.setVisible(true);
                 history.setVisible(false);
                 ranked.setVisible(false);
 
-                btnHome.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);");
+                btnHome.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);" +
+                        "-fx-background-color: linear-gradient(from 0% 10% to 0% 100%, rgba(248,198,187,0), rgba(156,153,141,0.3));");
                 btnHistory.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
                 btnRanked.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
 
@@ -88,9 +88,14 @@ public class MainFrm {
                         history.setVisible(false);
                         ranked.setVisible(false);
 
-                        btnHome.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);");
-                        btnHistory.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
-                        btnRanked.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
+                        btnHome.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);" +
+                                "-fx-background-color: linear-gradient(from 0% 10% to 0% 100%, rgba(248,198,187,0), rgba(156,153,141,0.3));");
+                        btnHistory.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);" +
+                                "-fx-background-color: transparent;");
+                        btnRanked.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);" +
+                                "-fx-background-color: transparent;");
+
+                        audioClickButton();
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -104,14 +109,19 @@ public class MainFrm {
                         history.setVisible(true);
                         ranked.setVisible(false);
 
-                        btnHome.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
-                        btnHistory.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);");
-                        btnRanked.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
+                        btnHome.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7); " +
+                                "-fx-background-color: transparent;");
+                        btnHistory.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);" +
+                                "-fx-background-color: linear-gradient(from 0% 10% to 0% 100%, rgba(248,198,187,0), rgba(156,153,141,0.3));");
+                        btnRanked.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);" +
+                                "-fx-background-color: transparent;");
 
                         mySocket.sendData(new ObjectWrapper(ObjectWrapper.GET_HISTORY));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    audioClickButton();
                 });
 
                 // Xu ly su kien click vao button Ranking
@@ -121,24 +131,53 @@ public class MainFrm {
                         history.setVisible(false);
                         ranked.setVisible(true);
 
-                        btnHome.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
-                        btnHistory.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
-                        btnRanked.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);");
+                        btnHome.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);" +
+                                "-fx-background-color: transparent;");
+                        btnHistory.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);" +
+                                "-fx-background-color: transparent;");
+                        btnRanked.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);" +
+                                "-fx-background-color: linear-gradient(from 0% 10% to 0% 100%, rgba(248,198,187,0), rgba(156,153,141,0.3));");
 
                         mySocket.sendData(new ObjectWrapper(ObjectWrapper.GET_RANKING));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    audioClickButton();
                 });
 
                 //client send request to server to get all user
                 mySocket.sendData(new ObjectWrapper(ObjectWrapper.GET_ALL_USER, null));
+
+                //button logout
+                Button btnLogout = (Button) loader.getNamespace().get("btnLogout");
+                btnLogout.setOnAction(event -> {
+                    audioClickButtonLogout();
+                    mySocket.sendData(new ObjectWrapper(ObjectWrapper.EXIT_MAIN_FORM, null));
+                    mySocket.setMainScene(null);
+                    mySocket.setSetShipFrm(null);
+                    mySocket.setLoginScreen(null);
+                    backgroundMusicPlayer.stop();
+
+                    LoginFrm loginFrm = new LoginFrm();
+                    mySocket.setLoginFrm(loginFrm);
+                    mySocket.getLoginFrm().openScene();
+                });
+
+                //button refresh
+                Button btnRefresh = (Button) loader.getNamespace().get("btnRefresh");
+                btnRefresh.setOnAction(event -> {
+                    mySocket.sendData(new ObjectWrapper(ObjectWrapper.UPDATE_WAITING_LIST_REQUEST, null));
+                    System.out.println("Refresh");
+                });
 
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
+        // Khởi tạo âm thanh nen
+        initializeBackgroundMusic();
     }
 
     public void receivedDataProcessing(ObjectWrapper data) {
@@ -255,6 +294,7 @@ public class MainFrm {
 
                                 btnInvite.setOnAction(event -> {
                                     mySocket.sendData(new ObjectWrapper(ObjectWrapper.SEND_PLAY_REQUEST, namePlayer));
+                                    audioClickButton();
                                 });
                             } else if(mapUserStatus.get(namePlayer).equals("In Game")) {
                                 circleStatus.setStyle("-fx-stroke: #584ee6");
@@ -306,6 +346,7 @@ public class MainFrm {
                         // Xu ly su kien click vao button Accept: chap nhan loi moi choi
                         Button btnAccept = (Button) itemUser.lookup("#btnAccept");
                         btnAccept.setOnAction(event -> {
+                            audioBeep();
                             mySocket.sendData(new ObjectWrapper(ObjectWrapper.ACCEPTED_PLAY_REQUEST));
                             receivePlayRequest.getChildren().remove(itemUser);
                         });
@@ -313,6 +354,7 @@ public class MainFrm {
                         // Xu ly su kien click vao button Reject: tu choi loi moi choi
                         Button btnReject = (Button) itemUser.lookup("#btnReject");
                         btnReject.setOnAction(event -> {
+                            audioBeep();
                             mySocket.sendData(new ObjectWrapper(ObjectWrapper.REJECTED_PLAY_REQUEST));
                             receivePlayRequest.getChildren().remove(itemUser);
                         });
@@ -320,6 +362,8 @@ public class MainFrm {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    audioNotification();
                     break;
 
                 case ObjectWrapper.SERVER_SEND_HISTORY:
@@ -356,43 +400,74 @@ public class MainFrm {
                             e.printStackTrace();
                         }
                     }
-
                     break;
+
+
                 case ObjectWrapper.SERVER_SEND_RANKING:
                     List<PlayerHistory> leaderboard = (List<PlayerHistory>) data.getData();
 
-                    VBox vboxRanked = (VBox) scene.lookup("#VboxRanked");
-                    vboxRanked.getChildren().clear();
+                    HashMap<String, String> mapRanking = new HashMap<>();
+                    HashMap<String, PlayerHistory> mapPlayerRanking = new HashMap<>();
 
-                    int i = 1;
+                    ArrayList<PlayerHistory> listPlayerRankINTERN = new ArrayList<>();
+                    ArrayList<PlayerHistory> listPlayerRankMASTER = new ArrayList<>();
+                    ArrayList<PlayerHistory> listPlayerRankGRANDMASTER = new ArrayList<>();
+                    ArrayList<PlayerHistory> listPlayerRankCHALLENGER = new ArrayList<>();
+
                     for(PlayerHistory playerRank : leaderboard) {
-                        FXMLLoader itemRankedLoad = new FXMLLoader(getClass().getResource("/Fxml/Client/ItemRank.fxml"));
-                        try {
-                            HBox itemRanked = itemRankedLoad.load();
-                            Label lblStt = (Label) itemRanked.getChildren().getFirst();
-                            Label lblPlayers = (Label) itemRanked.getChildren().get(1);
-                            Label lblWins = (Label) itemRanked.getChildren().get(2);
-                            Label lblLosses = (Label) itemRanked.getChildren().get(3);
-                            Label lblDraws = (Label) itemRanked.getChildren().get(4);
-                            Label lblAFKs = (Label) itemRanked.getChildren().get(5);
-                            Label lplPoints = (Label) itemRanked.getChildren().get(6);
-                            Label lblRank = (Label) itemRanked.getChildren().get(7);
-
-                            lblStt.setText(String.valueOf(i));
-                            lblPlayers.setText(playerRank.getUsername());
-                            lblWins.setText(String.valueOf(playerRank.getTotalWins()));
-                            lblLosses.setText(String.valueOf(playerRank.getTotalLosses()));
-                            lblDraws.setText(String.valueOf(playerRank.getTotalDraw()));
-                            lblAFKs.setText(String.valueOf(playerRank.getTotalAfk()));
-                            lplPoints.setText(String.valueOf(playerRank.getPoints()));
-                            lblRank.setText(String.valueOf(playerRank.getRanking()));
-                            i++;
-
-                            vboxRanked.getChildren().add(itemRanked);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        mapPlayerRanking.put(playerRank.getUsername(), playerRank);
+                        String rank = "";
+                       int point = playerRank.getPoints();
+                        if (point < 20) {
+                            rank = "INTERN";
+                            listPlayerRankINTERN.add(playerRank);
+                        } else if (point < 40) {
+                            rank = "MASTER";
+                            listPlayerRankMASTER.add(playerRank);
+                        } else if (point < 60) {
+                            rank = "GRANDMASTER";
+                            listPlayerRankGRANDMASTER.add(playerRank);
+                        } else {
+                            rank = "CHALLENGER";
+                            listPlayerRankCHALLENGER.add(playerRank);
                         }
+                        mapRanking.put(playerRank.getUsername(), rank);
                     }
+
+                    ChoiceBox choiceBox = (ChoiceBox) scene.lookup("#choiceBoxRank");
+                    if (choiceBox.getItems().isEmpty()) {
+                        choiceBox.getItems().addAll("INTERN", "MASTER", "GRANDMASTER", "CHALLENGER");
+                    }
+
+                    if(mapRanking.get(mySocket.getUsername()) == null) {
+                        System.out.println("mapRanking.get(mySocket.getUsername()) is null");
+                    }
+                    choiceBox.setValue(mapRanking.get(mySocket.getUsername()));
+
+                    VBox vboxRanked = (VBox) scene.lookup("#vboxRanked");
+                    ImageView imgRank = (ImageView) scene.lookup("#flagRank");
+
+                    setUIrank(vboxRanked, listPlayerRankINTERN, mapRanking.get(mySocket.getUsername()), imgRank);
+
+                    choiceBox.setOnAction(event -> {
+                        String rank = (String) choiceBox.getValue();
+                        vboxRanked.getChildren().clear();
+                        switch (rank) {
+                            case "INTERN":
+                                setUIrank(vboxRanked, listPlayerRankINTERN, rank, imgRank);
+                                break;
+                            case "MASTER":
+                                setUIrank(vboxRanked, listPlayerRankMASTER, rank, imgRank);
+                                break;
+                            case "GRANDMASTER":
+                                setUIrank(vboxRanked, listPlayerRankGRANDMASTER, rank, imgRank);
+                                break;
+                            case "CHALLENGER":
+                                setUIrank(vboxRanked, listPlayerRankCHALLENGER, rank, imgRank);
+                                break;
+                        }
+                    });
+
                     break;
 
                 case ObjectWrapper.SERVER_SET_GAME_READY:
@@ -415,7 +490,7 @@ public class MainFrm {
         Media backgroundMusic = new Media(backgroundMusicFile);
         backgroundMusicPlayer = new MediaPlayer(backgroundMusic);
 
-        backgroundMusicPlayer.setVolume(0.2);
+        backgroundMusicPlayer.setVolume(0.1);
         backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
         // Thêm error handler
@@ -430,4 +505,94 @@ public class MainFrm {
 
         backgroundMusicPlayer.play();
     }
+
+    public void audioClickButton(){
+        String clickButtonFile = new File("src/main/resources/Sounds/clickButton.mp3").toURI().toString();
+        Media clickButton = new Media(clickButtonFile);
+        MediaPlayer clickButtonPlayer = new MediaPlayer(clickButton);
+        clickButtonPlayer.setVolume(0.8);
+        clickButtonPlayer.play();
+    }
+
+    public void audioNotification(){
+        String notificationFile = new File("src/main/resources/Sounds/notification.mp3").toURI().toString();
+        Media notification = new Media(notificationFile);
+        MediaPlayer notificationPlayer = new MediaPlayer(notification);
+        notificationPlayer.setVolume(1);
+        notificationPlayer.play();
+    }
+
+    public void audioBeep(){
+        String beepFile = new File("src/main/resources/Sounds/beeping.mp3").toURI().toString();
+        Media beep = new Media(beepFile);
+        MediaPlayer beepPlayer = new MediaPlayer(beep);
+        beepPlayer.setVolume(1);
+        beepPlayer.play();
+    }
+
+    public void setUIrank(VBox vboxRanked, ArrayList<PlayerHistory> listPlayer, String rank, ImageView imgRank) {
+        Platform.runLater(() -> {
+
+            vboxRanked.getChildren().clear();
+            switch (rank) {
+                case "INTERN":
+                    String path = getClass().getResource("/Images/Intern.png").toExternalForm();
+                    imgRank.setImage(new Image(path));
+                    break;
+                case "MASTER":
+                    String path1 = getClass().getResource("/Images/Master.png").toExternalForm();
+                    imgRank.setImage(new Image(path1));
+                    break;
+                case "GRANDMASTER":
+                    String path2 = getClass().getResource("/Images/Grandmaster.png").toExternalForm();
+                    imgRank.setImage(new Image(path2));
+                    break;
+                case "CHALLENGER":
+                    String path3 = getClass().getResource("/Images/Challenger.png").toExternalForm();
+                    imgRank.setImage(new Image(path3));
+                    break;
+            }
+
+            int i = 1;
+            for(PlayerHistory playerRank : listPlayer) {
+                FXMLLoader itemRankedLoad = new FXMLLoader(getClass().getResource("/Fxml/Client/ItemRank.fxml"));
+                try {
+                    HBox itemRanked = itemRankedLoad.load();
+                    Label lblStt = (Label) itemRanked.getChildren().getFirst();
+                    Label lblPlayers = (Label) itemRanked.getChildren().get(1);
+                    Label lblWins = (Label) itemRanked.getChildren().get(2);
+                    Label lblLosses = (Label) itemRanked.getChildren().get(3);
+                    Label lblDraws = (Label) itemRanked.getChildren().get(4);
+                    Label lblAFKs = (Label) itemRanked.getChildren().get(5);
+                    Label lplPoints = (Label) itemRanked.getChildren().get(6);
+
+                    lblStt.setText(String.valueOf(i));
+                    lblPlayers.setText(playerRank.getUsername());
+                    lblWins.setText(String.valueOf(playerRank.getTotalWins()));
+                    lblLosses.setText(String.valueOf(playerRank.getTotalLosses()));
+                    lblDraws.setText(String.valueOf(playerRank.getTotalDraw()));
+                    lblAFKs.setText(String.valueOf(playerRank.getTotalAfk()));
+                    lplPoints.setText(String.valueOf(playerRank.getPoints()));
+                    i++;
+
+                    if(playerRank.getUsername().equals(mySocket.getUsername())) {
+                        itemRanked.setStyle("-fx-background-color: rgba(85,103,223,0.4);");
+                    }
+
+                    vboxRanked.getChildren().add(itemRanked);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void audioClickButtonLogout(){
+        String clickButtonFile = new File("src/main/resources/Sounds/click-233950.mp3").toURI().toString();
+        Media clickButton = new Media(clickButtonFile);
+        MediaPlayer clickButtonPlayer = new MediaPlayer(clickButton);
+        clickButtonPlayer.setVolume(0.8);
+        clickButtonPlayer.play();
+    }
+
 }
