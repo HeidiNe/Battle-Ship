@@ -53,64 +53,66 @@ public class LoginFrm extends Application {
     public void openScene (){
         if(mySocket.getStage() == null) launch();
 
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Client/Login.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            mySocket.setLoginScreen(scene);
+        Platform.runLater(()->{
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Client/Login.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                mySocket.setLoginScreen(scene);
 
-            stage = mySocket.getStage();
-            stage.setScene(scene);
-            stage.setTitle("Login");
-            stage.show();
+                stage = mySocket.getStage();
+                stage.setScene(scene);
+                stage.setTitle("Login");
+                stage.show();
 
-            // JavaFX UI Controls
-            TextField usernameLoginTextField = (TextField) fxmlLoader.getNamespace().get("usernameLoginTextField");
-            PasswordField passwordLoginField = (PasswordField) fxmlLoader.getNamespace().get("passwordLoginField");
-            Button loginButton = (Button) fxmlLoader.getNamespace().get("loginButton");
-            Button signupButton = (Button) fxmlLoader.getNamespace().get("signupButton");
+                // JavaFX UI Controls
+                TextField usernameLoginTextField = (TextField) fxmlLoader.getNamespace().get("usernameLoginTextField");
+                PasswordField passwordLoginField = (PasswordField) fxmlLoader.getNamespace().get("passwordLoginField");
+                Button loginButton = (Button) fxmlLoader.getNamespace().get("loginButton");
+                Button signupButton = (Button) fxmlLoader.getNamespace().get("signupButton");
 
-            Label msg = (Label) scene.lookup("#msg");
-            ImageView imgErr = (ImageView) scene.lookup("#iconErr");
-            msg.setVisible(false);
-            imgErr.setVisible(false);
+                Label msg = (Label) scene.lookup("#msg");
+                ImageView imgErr = (ImageView) scene.lookup("#iconErr");
+                msg.setVisible(false);
+                imgErr.setVisible(false);
 
-            // Set up click event handlers
-            loginButton.setOnAction(event -> {
-                audioClickButton();
-                // Handle login button click
-                String username = usernameLoginTextField.getText();
-                String password = passwordLoginField.getText();
+                // Set up click event handlers
+                loginButton.setOnAction(event -> {
+                    audioClickButton();
+                    // Handle login button click
+                    String username = usernameLoginTextField.getText();
+                    String password = passwordLoginField.getText();
 
-                if(username.isEmpty()){
-                    msg.setVisible(true);
-                    imgErr.setVisible(true);
-                    msg.setText("Error: Username is not empty!");
-                    return;
-                }
-                if(password.isEmpty()){
-                    msg.setVisible(true);
-                    imgErr.setVisible(true);
-                    msg.setText("Error: Password is not empty!");
-                    return;
-                }
-                // Process login logic
-                Player player = new Player(username, password);
-                mySocket.sendData(new ObjectWrapper(ObjectWrapper.LOGIN_USER, player));
-            });
+                    if(username.isEmpty()){
+                        msg.setVisible(true);
+                        imgErr.setVisible(true);
+                        msg.setText("Error: Username is not empty!");
+                        return;
+                    }
+                    if(password.isEmpty()){
+                        msg.setVisible(true);
+                        imgErr.setVisible(true);
+                        msg.setText("Error: Password is not empty!");
+                        return;
+                    }
+                    // Process login logic
+                    Player player = new Player(username, password);
+                    mySocket.sendData(new ObjectWrapper(ObjectWrapper.LOGIN_USER, player));
+                });
 
-            signupButton.setOnAction(event -> {
-                audioClickButton();
-                if (mySocket.getRegisterFrm() == null) {
-                    RegisterFrm registerFrm = new RegisterFrm();
-                    mySocket.setRegisterFrm(registerFrm);
-                }
-                backgroundMusicPlayer.stop();
-                mySocket.getRegisterFrm().openScene();
-            });
-            initializeBackgroundMusic();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                signupButton.setOnAction(event -> {
+                    audioClickButton();
+                    if (mySocket.getRegisterFrm() == null) {
+                        RegisterFrm registerFrm = new RegisterFrm();
+                        mySocket.setRegisterFrm(registerFrm);
+                    }
+                    backgroundMusicPlayer.stop();
+                    mySocket.getRegisterFrm().openScene();
+                });
+                initializeBackgroundMusic();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void receivedDataProcessing(ObjectWrapper data) {
@@ -127,7 +129,7 @@ public class LoginFrm extends Application {
                 msg.setWrapText(true);
                 msg.setText("Error: Incorrect username or password.");
             } else {
-                backgroundMusicPlayer.stop();
+                mySocket.getBackgroundMusicPlayer().stop();
                 TextField usernameLoginTextField = (TextField) loginScreen.lookup("#usernameLoginTextField");
                 String username = usernameLoginTextField.getText();
 
@@ -151,10 +153,10 @@ public class LoginFrm extends Application {
         String backgroundMusicFile = new File("src/main/resources/Sounds/login.mp3").toURI().toString();
         Media backgroundMusic = new Media(backgroundMusicFile);
         backgroundMusicPlayer = new MediaPlayer(backgroundMusic);
-
+        mySocket.setBackgroundMusicPlayer(backgroundMusicPlayer);
         backgroundMusicPlayer.setVolume(0.5);
         backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-
+        
         // Thêm error handler
         backgroundMusicPlayer.setOnError(() -> {
             System.out.println("Media error occurred: " + backgroundMusicPlayer.getError());

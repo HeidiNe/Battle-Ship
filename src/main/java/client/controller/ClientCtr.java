@@ -12,6 +12,7 @@ import shared.model.Player;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import javafx.scene.media.MediaPlayer;
 
 public class ClientCtr {
 
@@ -26,9 +27,18 @@ public class ClientCtr {
 
     private String username;
     private Stage stage;
-
+    
+    MediaPlayer backgroundMusicPlayer;
     private ConnectFrm connectFrm;
     private LoginFrm loginFrm;
+
+    public MediaPlayer getBackgroundMusicPlayer() {
+        return backgroundMusicPlayer;
+    }
+
+    public void setBackgroundMusicPlayer(MediaPlayer backgroundMusicPlayer) {
+        this.backgroundMusicPlayer = backgroundMusicPlayer;
+    }
     private MainFrm mainFrm;
     private SetShipFrm setShipFrm;
     private PlayFrm playFrm;
