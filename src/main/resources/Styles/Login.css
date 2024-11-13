@@ -25,12 +25,17 @@
 }
 
 .text-input:focused {
-    -fx-border-color: #FF4517;
+    -fx-border-color: #385c30;
     -fx-border-width: 2;
 }
 
 .input-label {
-    -fx-text-fill: #FF4517;
+    -fx-text-fill: #aa5a42;
+}
+
+.err{
+    -fx-text-fill: #5c0000;
+    -fx-font-size: 12px;
 }
 
 .login-button {
