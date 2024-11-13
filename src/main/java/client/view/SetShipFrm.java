@@ -342,7 +342,17 @@ public class SetShipFrm {
                 shipListModel.remove(i);
             }
     }
-    
+    private ArrayList<String> swapshipsLocation(ArrayList<String> locationArr){
+        ArrayList<String> tmp = new ArrayList<>();
+        for(String pos : locationArr){
+            if(pos.compareTo("/") == 0){
+                tmp.add(pos);
+            }else{
+                tmp.add(pos.charAt(1) + "" + pos.charAt(0));
+            }
+        }
+        return tmp;
+    }
     private void ready() {
         int cnt=0;
         for(String id : shipListModel){
@@ -353,7 +363,7 @@ public class SetShipFrm {
         if (cnt == 5 || shipListModel.size() == 0) {
             TimeCD.stop();
 
-            ObjectWrapper objectWrapper = new ObjectWrapper(ObjectWrapper.READY_PLAY_GAME, shipsLocation);
+            ObjectWrapper objectWrapper = new ObjectWrapper(ObjectWrapper.READY_PLAY_GAME, swapshipsLocation(shipsLocation));
             mySocket.sendData(objectWrapper);
             
             msg.setText("Waiting Your Enemy");

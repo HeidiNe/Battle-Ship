@@ -179,6 +179,8 @@ public class ServerProcessing extends Thread {
                             gameCtr.setShot(true);
                             gameCtr.setCntMissTurn(0);
                             String location = (String) data.getData();
+                            System.out.println("Server shoot "+ location);
+
                             Object[] result = gameCtr.handleShot(location);
                             stopAllTimers();
 
