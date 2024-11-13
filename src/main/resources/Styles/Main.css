@@ -47,6 +47,8 @@
     -fx-font-size: 14px;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
 }
 
 .item-user-mini{
@@ -104,3 +106,34 @@
 .scroll-pane {
     -fx-background-color: transparent;
 }
+
+.userInvitePlayGame{
+    -fx-text-fill: rgba(251, 130, 130, 0.7);
+    -fx-font-size: 11px;
+    -fx-font-family: JejuHallasan;
+}
+
+.itemsUserHome{
+    --fx-background-color: transparent;
+}
+
+.itemsUserHome:hover{
+    -fx-background-color: rgba(146, 250, 250, 0.2);
+}
+
+/* Tùy chỉnh thanh cuộn dọc của ScrollPane */
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent; /* Nền trong suốt */
+    -fx-pref-width: 10px; /* Độ rộng của thanh cuộn dọc */
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(213, 183, 128, 0.31); /* Màu của nút cuộn */
+    -fx-background-radius: 5px; /* Bo tròn các góc của nút cuộn */
+}
+
+/* Tùy chỉnh khi nút cuộn được nhấn */
+.scroll-pane .scroll-bar .thumb:pressed {
+    -fx-background-color: rgba(246, 192, 123, 0.67); /* Màu nút cuộn khi nhấn */
+}
+

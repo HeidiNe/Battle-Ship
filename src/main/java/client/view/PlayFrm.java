@@ -152,13 +152,20 @@ public class PlayFrm {
     }
     private void handleGridClick(MouseEvent e, Pane cell) {
         System.out.println("clicked  "+ cell.getId());
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
         cell.setDisable(true);
         String location = cell.getId();
         buttonEnemyShooted.add(cell);
         System.out.println("Ban gui di---"+ swapLocation(location));
         TimeCD.stop();
+<<<<<<< HEAD
         mySocket.sendData(new ObjectWrapper(ObjectWrapper.SHOOT_REQUEST, swapLocation(location)));
+=======
+        mySocket.sendData(new ObjectWrapper(ObjectWrapper.SHOOT_REQUEST, location));
+>>>>>>> main
     }
     
     private void drawHit(String position, String idGrid){

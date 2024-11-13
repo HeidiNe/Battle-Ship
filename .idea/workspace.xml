@@ -5,21 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff6bcba6-17c0-4544-ba81-344aaa0f8105" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Win.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/view/LoginFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/LoginFrm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/client/view/ResultFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/ResultFrm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/view/PlayFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/PlayFrm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/view/RegisterFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/RegisterFrm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/History.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/History.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemHistory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemHistory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemHome.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemHome.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemRank.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemRank.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ItemUser.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Login.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Main.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Ranked.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Ranked.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Result.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Result.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/ResultFrm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Lose.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Register.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Bronze.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Gold.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/logout.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/logout.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Sounds/backgroundMusic.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Sounds/backgroundMusic.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Styles/History.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Styles/History.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Styles/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Styles/Login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Styles/Main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Styles/Main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Styles/Result.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Styles/Result.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Styles/Ranked.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +103,7 @@
       <recent name="client.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ConnectFrm">
+  <component name="RunManager" selected="Application.ServerMainFrm">
     <configuration name="ConnectFrm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.view.ConnectFrm" />
       <module name="Battle-Ship" />
@@ -164,10 +171,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ConnectFrm" />
         <item itemvalue="Application.ServerMainFrm" />
-        <item itemvalue="Application.RankingFrm" />
+        <item itemvalue="Application.ConnectFrm" />
         <item itemvalue="Application.LoginFrm" />
+        <item itemvalue="Application.RankingFrm" />
         <item itemvalue="Application.HelloApplication" />
       </list>
     </recent_temporary>
@@ -218,22 +225,17 @@
       <workItem from="1731337132958" duration="7811000" />
       <workItem from="1731383427273" duration="1432000" />
       <workItem from="1731384932031" duration="4352000" />
+      <workItem from="1731389584292" duration="301000" />
+      <workItem from="1731400315501" duration="2302000" />
+      <workItem from="1731405537286" duration="1011000" />
+      <workItem from="1731414626402" duration="2270000" />
+      <workItem from="1731468674141" duration="29868000" />
+      <workItem from="1731505945065" duration="6282000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/client/view/MainFrm.java</url>
-          <line>259</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

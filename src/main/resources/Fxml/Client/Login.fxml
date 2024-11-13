@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
+   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="516.0" prefWidth="277.0" styleClass="anchor" stylesheets="@../../Styles/Login.css">
          <children>
@@ -55,7 +55,7 @@
                </children>
             </VBox>
 
-            <Button fx:id="loginButton" layoutX="109.0" layoutY="365.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="login-button">
+            <Button fx:id="loginButton" layoutX="108.0" layoutY="389.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="login-button">
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -63,7 +63,13 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="signupButton" layoutX="71.0" layoutY="462.0" mnemonicParsing="false" styleClass="signup-button" text="CREATE ACCOUNT" />
+            <Button fx:id="signupButton" layoutX="61.0" layoutY="465.0" mnemonicParsing="false" styleClass="signup-button" text="CREATE ACCOUNT" />
+            <ImageView fx:id="iconErr" fitHeight="22.0" fitWidth="17.0" layoutX="29.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/err.png" />
+               </image>
+            </ImageView>
+            <Label id="msg" layoutX="61.0" layoutY="298.0" maxWidth="191.0" minWidth="191.0" prefHeight="36.0" prefWidth="191.0" styleClass="err" text="Label" />
          </children>
       </AnchorPane>
 
