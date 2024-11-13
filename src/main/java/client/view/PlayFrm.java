@@ -30,21 +30,20 @@ import javax.sound.sampled.Clip;
 import shared.model.Player;
 
 public class PlayFrm {
-     private Timeline TimeCD;
+    private Timeline TimeCD;
     private ClientCtr mySocket = ClientCtr.getInstance();
     private Stage stage = mySocket.getStage();
     private HashSet<Pane> buttonEnemyShooted = new HashSet<>();
     private boolean playerTurn = false;
-    private ArrayList<String> shipsLocation = new ArrayList<>(Arrays.asList("00","10","/","32","33","34","/","16","26","36","/","56","57","58","59","/","53","63","73","83","93","/"));
+    private ArrayList<String> shipsLocation = new ArrayList<>();
     public PlayFrm(ArrayList<String> shipsLocation, boolean playerTurn ) {
         this.playerTurn = playerTurn;
         this.shipsLocation = shipsLocation;
     }
 
     public void openScene() {
-
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/SetShip.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Play.fxml"));
             Scene scene = new Scene(loader.load());
             mySocket.setPlayScene(scene);
             
@@ -61,8 +60,11 @@ public class PlayFrm {
             stage.setTitle("Set Ship");
             stage.show();
             
-            
-
+            if (playerTurn) {
+                startYourTurn();
+            } else {
+                startEnemyTurn();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,9 +88,7 @@ public class PlayFrm {
                 Pane cellPane = new Pane();
                 cellPane.setPrefSize(35, 35); 
                 cellPane.setId(x + "" + y); 
-
                 cellPane.setStyle("-fx-border-color: black; -fx-background-color: lightblue;");
-                System.out.println("Sao the nhi!! " + grid.getId());
                 if(grid.getId().compareToIgnoreCase("enemygrid") == 0){
                     cellPane.setOnMouseClicked(event -> handleGridClick(event, cellPane));
                 }
@@ -152,14 +152,13 @@ public class PlayFrm {
     }
     private void handleGridClick(MouseEvent e, Pane cell) {
         System.out.println("clicked  "+ cell.getId());
-        String[] tmp = {"32","33","34"};
-        drawDestroyedShip(tmp,"#enemygrid");
+
         cell.setDisable(true);
         String location = cell.getId();
         buttonEnemyShooted.add(cell);
-
+        System.out.println("Ban gui di---"+ swapLocation(location));
         TimeCD.stop();
-//        mySocket.sendData(new ObjectWrapper(ObjectWrapper.SHOOT_REQUEST, location));
+        mySocket.sendData(new ObjectWrapper(ObjectWrapper.SHOOT_REQUEST, swapLocation(location)));
     }
     
     private void drawHit(String position, String idGrid){
@@ -193,11 +192,12 @@ public class PlayFrm {
         
         shipPane.getChildren().add(shipImageView);
         
-        gridPane.add(shipPane, row, col);    
+        gridPane.add(shipPane, col, row);    
         shipPane.setDisable(true);
     }
     private void drawDestroyedShip(String[] positions, String idGrid){
         ArrayList<String> ships = new ArrayList<>(Arrays.asList(positions));
+        ships = swapshipsLocation(ships);
         drawShip(ships,idGrid);
         for(String ship : ships){
             drawHit(ship, idGrid);
@@ -213,7 +213,7 @@ public class PlayFrm {
         yourMsg.setVisible(true);
         yourMsg.setText("Your Turn!");
         TimeCD = setCountDownTime(16);
-        playerTurn = false;
+        playerTurn = true;
     }
     private void startEnemyTurn(){
         GridPane enemyGrid = (GridPane) mySocket.getPlayScene().lookup("#enemygrid");
@@ -233,7 +233,7 @@ public class PlayFrm {
        timelineWrapper[0] = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
            timeRemaining[0]--;
 
-           Label lblTime = (Label) mySocket.getSetShipScene().lookup("#clock");
+           Label lblTime = (Label) mySocket.getPlayScene().lookup("#clock");
            lblTime.setText(String.valueOf(timeRemaining[0]));
 
            // Kiểm tra khi hết giờ và dừng Timeline
@@ -254,21 +254,24 @@ public class PlayFrm {
             switch (data.getPerformative()) {
                 case ObjectWrapper.SERVER_TRANSFER_SHOOT_FAILTURE:
                      playSound("missing.wav");
+                     System.out.println("DU LIEU BAN HUT   "+ swapLocation((String) data.getData()));
                     if (playerTurn) {
-                        drawMiss((String) data.getData(), "#enemygrid");
+                        System.out.println("client nhan "+ swapLocation((String) data.getData()));
+                        drawMiss(swapLocation((String) data.getData()) , "#enemygrid");
                         startEnemyTurn();
                     } else {
-                        drawMiss((String) data.getData(), "#mygrid");
+                        drawMiss(swapLocation((String) data.getData()), "#mygrid");
                         startYourTurn();
                     }
                     break;
                 case ObjectWrapper.SERVER_TRANSFER_SHOOT_HIT_POINT:
                     playSound("score.wav");
+                    System.out.println("DU LIEU BAN Trung--   "+ swapLocation((String) data.getData()));
                     if (playerTurn) {
-                        drawHit((String) data.getData(), "#enemygrid");
+                        drawHit(swapLocation((String) data.getData()), "#enemygrid");
                         startYourTurn();
                     } else {
-                        drawHit((String) data.getData(), "#mygrid");
+                        drawHit(swapLocation((String) data.getData()), "#mygrid");
                         startEnemyTurn();
                     }
                     break;
@@ -338,7 +341,20 @@ public class PlayFrm {
             }
         });
     }
-    
+    private ArrayList<String> swapshipsLocation(ArrayList<String> locationArr){
+        ArrayList<String> tmp = new ArrayList<>();
+        for(String pos : locationArr){
+            if(pos.compareTo("/") == 0){
+                tmp.add(pos);
+            }else{
+                tmp.add(pos.charAt(1) +"" + pos.charAt(0));
+            }
+        }
+        return tmp;
+    }
+    private String swapLocation(String loc){
+       return loc.charAt(1) +"" + loc.charAt(0);
+    }
     private void playSound(String soundFileName) {
         try {
             // Sử dụng ClassLoader để nạp file âm thanh từ thư mục resources
