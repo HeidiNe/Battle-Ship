@@ -2,10 +2,14 @@ package client.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import shared.dto.ObjectWrapper;
 import client.controller.ClientCtr;
 import client.helper.ShipGenerator;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -127,23 +131,27 @@ public class SetShipFrm {
             // add event to random btn 
             Button randomBtn = (Button) scene.lookup("#randomBtn");
             randomBtn.setOnMouseClicked(e ->{
+                audioClickButton();
                 random();
             });
             
             // add event to reset btn 
             Button resetBtn = (Button) scene.lookup("#resetBtn");
             resetBtn.setOnMouseClicked(e ->{
+                audioClickButton();
                 reset();
             });
             
             // add event to ready btn 
             Button readyBtn = (Button) scene.lookup("#readyBtn");
             readyBtn.setOnMouseClicked(e ->{
+                audioClickButton();
                 ready();
             });
             
             Button exitBtn = (Button) scene.lookup("#exitBtn");
             exitBtn.setOnMouseClicked(e ->{
+                audioBeep();
                 Alert alert = new Alert(AlertType.CONFIRMATION);
                 alert.setTitle("Thoát");
                 alert.setHeaderText("Bạn có thật sự muốn thoát trận đấu? Điều này sẽ khiến bạn bị trừ điểm.");
@@ -178,6 +186,7 @@ public class SetShipFrm {
             hor.setToggleGroup(group);
             
             group.selectedToggleProperty().addListener((observable, oldToggle, newToggle) -> {
+                audioClickButton();
                 if (newToggle == ver) {
                    horizontal=false;
                 } else if (newToggle == hor) {
@@ -259,10 +268,10 @@ public class SetShipFrm {
         boolean isHorizontal = (startRow == endRow);
 
         GridPane gridPane = (GridPane) mySocket.getSetShipScene().lookup("#board-ship");
-        String shipImagePath = "/Images/ship" + currentShip.size() + ".png";
+        String shipImagePath =  getClass().getResource("/Images/ship" + currentShip.size() + ".png").toExternalForm();
         
         if (!isHorizontal) {
-            shipImagePath= "/Images/ship" + currentShip.size()+"-ver" + ".png";
+            shipImagePath= getClass().getResource("/Images/ship" + currentShip.size()+"-ver" + ".png").toExternalForm();
         }
         Image shipImage = new Image(shipImagePath);
         ImageView shipImageView = new ImageView(shipImage);
@@ -430,14 +439,28 @@ public class SetShipFrm {
                     alert.setHeaderText(null);
                     alert.setContentText("Đối thủ của bạn đã rời đi, nhấn OK để xem kết quả");
                     alert.showAndWait();
-//                    ResultFrm resultFrm = new ResultFrm(mySocket);
-//                    mySocket.setResultFrm(resultFrm);
-
-//                    mySocket.getResultFrm().setVisible(true);
-//                    this.dispose();
+                    ResultFrm resultFrm = new ResultFrm();
+                    mySocket.setResultFrm(resultFrm);
+                    mySocket.getResultFrm().openScene();
                     break;
             }
         });
+    }
+
+    public void audioClickButton(){
+        String clickButtonFile = new File("src/main/resources/Sounds/clickButton.mp3").toURI().toString();
+        Media clickButton = new Media(clickButtonFile);
+        MediaPlayer clickButtonPlayer = new MediaPlayer(clickButton);
+        clickButtonPlayer.setVolume(0.8);
+        clickButtonPlayer.play();
+    }
+
+    public void audioBeep(){
+        String beepFile = new File("src/main/resources/Sounds/beeping.mp3").toURI().toString();
+        Media beep = new Media(beepFile);
+        MediaPlayer beepPlayer = new MediaPlayer(beep);
+        beepPlayer.setVolume(1);
+        beepPlayer.play();
     }
 
 }
