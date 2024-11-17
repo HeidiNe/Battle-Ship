@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class DAO {
 
     public static Connection con;
-    private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=bantau;encrypt=true;trustServerCertificate=true";
-    private static final String DB_USER = "sa";
-    private static final String DB_PASSWORD = "sa123";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/bantau";
+    private static final String DB_USER = "postgres";
+    private static final String DB_PASSWORD = "123456";
 
     public DAO() {
         try {

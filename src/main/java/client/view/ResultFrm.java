@@ -80,6 +80,10 @@ public class ResultFrm  {
                             Button btnLoseGo = (Button) loss.getNamespace().get("btnPlayAgainLose");
                             btnLoseGo.setOnAction(e -> {
                                 clicBackMain();
+                                mySocket.setSetShipFrm(null);
+                                mySocket.setSetShipScene(null);
+                                mySocket.setPlayFrm(null);
+                                mySocket.setPlayScene(null);
                                 mySocket.sendData(new ObjectWrapper(ObjectWrapper.BACK_TO_MAIN_FORM));
                                 mySocket.getMainFrm().openScene();
                                 clickButtonPlayer.stop();
@@ -105,7 +109,7 @@ public class ResultFrm  {
 
                             //set point and flag
                             ImageView flagWin = (ImageView) win.getNamespace().get("flagRankResultWin");
-                            Label lblPointWin = (Label) win.getNamespace().get("lblPointWin");;
+                            Label lblPointWin = (Label) win.getNamespace().get("lblPointWin");
                             int point = mySocket.getPoints();
 
 
@@ -127,6 +131,10 @@ public class ResultFrm  {
                             Button btnWinGo = (Button) win.getNamespace().get("btnPlayAgainWin");
                             btnWinGo.setOnAction(e -> {
                                 clicBackMain();
+                                mySocket.setSetShipFrm(null);
+                                mySocket.setSetShipScene(null);
+                                mySocket.setPlayFrm(null);
+                                mySocket.setPlayScene(null);
                                 mySocket.sendData(new ObjectWrapper(ObjectWrapper.BACK_TO_MAIN_FORM));
                                 mySocket.getMainFrm().openScene();
                                 clickButtonPlayer.stop();

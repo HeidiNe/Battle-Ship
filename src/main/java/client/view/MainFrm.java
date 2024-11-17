@@ -401,7 +401,6 @@ public class MainFrm {
                     try {
                         HBox itemUser = loader.load();
                         Label lblUserNameInvite = (Label) itemUser.lookup("#userNameInvite");
-
                         lblUserNameInvite.setText(username);
                         receivePlayRequest.getChildren().add(itemUser);
 

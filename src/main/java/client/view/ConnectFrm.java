@@ -148,18 +148,11 @@ public class ConnectFrm extends javax.swing.JFrame {
             btnDisconnect.setEnabled(true);
             btnConnect.setEnabled(false);
 
-            System.out.println("khong can reset");
-
            if (myControl.getLoginFrm() == null) {
                LoginFrm loginFrm = new LoginFrm();
                myControl.setLoginFrm(loginFrm);
            }
            myControl.getLoginFrm().openScene();
-            //     if (myControl.getPlayFrm()== null) {
-            //     PlayFrm playFrm = new PlayFrm();
-            //     myControl.setPlayFrm(playFrm);
-            // }
-            // myControl.getPlayFrm().openScene();
             
         } else {
             resetClient();

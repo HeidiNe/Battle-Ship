@@ -12,9 +12,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
@@ -54,6 +57,34 @@ public class PlayFrm {
             createGrid(enemyGrid);
             createGrid(myGrid);
             
+            Button quitBtn = (Button) scene.lookup("#quit");
+            quitBtn.setOnMouseClicked(event -> {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Thoát");
+                alert.setHeaderText("Bạn có thật sự muốn thoát trận đấu? Điều này sẽ khiến bạn bị trừ điểm.");
+
+                // Thêm các nút tùy chọn YES và NO
+                ButtonType yesButton = new ButtonType("Yes");
+                ButtonType noButton = new ButtonType("No");
+                alert.getButtonTypes().setAll(yesButton, noButton);
+
+                // Hiển thị hộp thoại và chờ người dùng chọn
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if (result.isPresent() && result.get() == yesButton) {
+                    TimeCD.stop();
+                    mySocket.sendData(new ObjectWrapper(ObjectWrapper.QUIT_WHEN_PLAY));
+                    mySocket.setPlayFrm(null);
+                    mySocket.setPlayScene(null);
+                    mySocket.setSetShipFrm(null);
+                    mySocket.setSetShipScene(null);
+                    if (mySocket.getMainFrm() == null) {
+                        MainFrm mainFrm = new MainFrm();
+                        mySocket.setMainFrm(mainFrm);
+                    }
+                    mySocket.getMainFrm().openScene();
+                }
+            });
             drawMyShips();
             
             stage.setScene(scene);
@@ -151,8 +182,6 @@ public class PlayFrm {
         }
     }
     private void handleGridClick(MouseEvent e, Pane cell) {
-        System.out.println("clicked  "+ cell.getId());
-
         cell.setDisable(true);
         String location = cell.getId();
         buttonEnemyShooted.add(cell);
@@ -207,6 +236,9 @@ public class PlayFrm {
 
     }
     private void startYourTurn(){
+        if (TimeCD != null) {
+            TimeCD.stop();
+        }
         GridPane enemyGrid = (GridPane) mySocket.getPlayScene().lookup("#enemygrid");
         enemyGrid.setDisable(false);
         Label enemyMsg = (Label) mySocket.getPlayScene().lookup("#enemyMsg");
@@ -218,6 +250,9 @@ public class PlayFrm {
         playerTurn = true;
     }
     private void startEnemyTurn(){
+        if (TimeCD != null) {
+            TimeCD.stop(); 
+        }
         GridPane enemyGrid = (GridPane) mySocket.getPlayScene().lookup("#enemygrid");
         enemyGrid.setDisable(true);
         Label enemyMsg = (Label) mySocket.getPlayScene().lookup("#enemyMsg");
@@ -228,27 +263,32 @@ public class PlayFrm {
         TimeCD = setCountDownTime(16);
         playerTurn = false;
     }
-    private Timeline  setCountDownTime(int time) {
-       final int[] timeRemaining = {time};
-       final Timeline[] timelineWrapper = new Timeline[1]; // Sử dụng mảng để bọc Timeline
 
-       timelineWrapper[0] = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-           timeRemaining[0]--;
+    private Timeline setCountDownTime(int time) {
+        final int[] timeRemaining = {time}; // Biến đếm ngược
+        Timeline timeline = new Timeline(); // Khởi tạo Timeline ngay từ đầu
 
-           Label lblTime = (Label) mySocket.getPlayScene().lookup("#clock");
-           lblTime.setText(String.valueOf(timeRemaining[0]));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), event -> {
+            timeRemaining[0]--; // Giảm thời gian
+            Label lblTime = (Label) mySocket.getPlayScene().lookup("#clock");
+            lblTime.setText(String.valueOf(timeRemaining[0]));
 
-           // Kiểm tra khi hết giờ và dừng Timeline
-           if (timeRemaining[0] <= 0) {
-               timelineWrapper[0].stop(); // Dừng Timeline khi hết thời gian
-           }
-       }));
-       timelineWrapper[0].setCycleCount(Timeline.INDEFINITE); // Đặt để lặp vô hạn
-       timelineWrapper[0].play(); // Bắt đầu bộ đếm thời gian
+            // Khi thời gian hết, dừng và chuyển trạng thái
+            if (timeRemaining[0] <= 0) {
+                timeline.stop(); // Dừng Timeline
+                if (playerTurn) {
+                    startEnemyTurn(); // Tự động chuyển lượt
+                } else {
+                    startYourTurn();
+                }
+            }
+        }));
 
-       return timelineWrapper[0]; // Trả về Timeline để có thể điều khiển từ bên ngoài
-   }
-    
+    timeline.setCycleCount(Timeline.INDEFINITE); // Lặp vô hạn
+    timeline.play(); // Bắt đầu chạy
+    return timeline; // Trả về để quản lý từ bên ngoài
+}
+
     
     public void receivedDataProcessing(ObjectWrapper data) {
         Platform.runLater(() -> {
@@ -268,7 +308,6 @@ public class PlayFrm {
                     break;
                 case ObjectWrapper.SERVER_TRANSFER_SHOOT_HIT_POINT:
                     playSound("score.wav");
-                    System.out.println("DU LIEU BAN Trung--   "+ swapLocation((String) data.getData()));
                     if (playerTurn) {
                         drawHit(swapLocation((String) data.getData()), "#enemygrid");
                         startYourTurn();
