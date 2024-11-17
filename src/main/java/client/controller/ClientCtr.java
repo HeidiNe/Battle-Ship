@@ -13,6 +13,7 @@ import shared.model.Player;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import javafx.scene.media.MediaPlayer;
 
 public class ClientCtr {
 
@@ -32,6 +33,7 @@ public class ClientCtr {
 
     private ConnectFrm connectFrm;
     private LoginFrm loginFrm;
+
     private MainFrm mainFrm;
     private SetShipFrm setShipFrm;
     private PlayFrm playFrm;

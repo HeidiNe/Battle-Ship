@@ -159,7 +159,7 @@ public class LoginFrm extends Application {
 
         backgroundMusicPlayer.setVolume(0.8);
         backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-
+        
         // Thêm error handler
         backgroundMusicPlayer.setOnError(() -> {
             System.out.println("Media error occurred: " + backgroundMusicPlayer.getError());
