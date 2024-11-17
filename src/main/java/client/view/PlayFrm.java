@@ -125,10 +125,10 @@ public class PlayFrm {
         boolean isHorizontal = (startRow == endRow);
 
         GridPane gridPane = (GridPane) mySocket.getPlayScene().lookup(idGrid);
-        String shipImagePath = "/Images/ship" + currentShip.size() + ".png";
+        String shipImagePath = getClass().getResource("/Images/ship" + currentShip.size() + ".png").toExternalForm();
         
         if (!isHorizontal) {
-            shipImagePath= "/Images/ship" + currentShip.size()+"-ver" + ".png";
+            shipImagePath= getClass().getResource("/Images/ship" + currentShip.size()+"-ver" + ".png").toExternalForm();
         }
         Image shipImage = new Image(shipImagePath);
         ImageView shipImageView = new ImageView(shipImage);
@@ -152,18 +152,28 @@ public class PlayFrm {
     }
     private void handleGridClick(MouseEvent e, Pane cell) {
         System.out.println("clicked  "+ cell.getId());
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         cell.setDisable(true);
         String location = cell.getId();
         buttonEnemyShooted.add(cell);
         System.out.println("Ban gui di---"+ swapLocation(location));
         TimeCD.stop();
+<<<<<<< HEAD
         mySocket.sendData(new ObjectWrapper(ObjectWrapper.SHOOT_REQUEST, swapLocation(location)));
+=======
+
+        mySocket.sendData(new ObjectWrapper(ObjectWrapper.SHOOT_REQUEST, swapLocation(location)));
+
+>>>>>>> main
     }
     
     private void drawHit(String position, String idGrid){
         int row = position.charAt(1) - '0';
         int col = position.charAt(0) - '0';
-        String shipImagePath = "/Images/hit.png";
+        String shipImagePath = getClass().getResource("/Images/hit.png").toExternalForm();
         Image shipImage = new Image(shipImagePath);
         ImageView shipImageView = new ImageView(shipImage);
         shipImageView.setFitHeight(35);
@@ -180,7 +190,7 @@ public class PlayFrm {
     private void drawMiss(String position, String idGrid){
         int row = position.charAt(1) - '0';
         int col = position.charAt(0) - '0';
-        String shipImagePath = "/Images/failure.png";
+        String shipImagePath = getClass().getResource("/Images/failure.png").toExternalForm();
         Image shipImage = new Image(shipImagePath);
         ImageView shipImageView = new ImageView(shipImage);
         shipImageView.setFitHeight(35);
@@ -306,11 +316,10 @@ public class PlayFrm {
                     alert.setHeaderText(null);
                     alert.setContentText("Trận đấu đã kết thúc, nhấn OK để xem kết quả");
                     alert.showAndWait();
-//                    ResultFrm resultFrm = new ResultFrm(mySocket);
-//                    mySocket.setResultFrm(resultFrm);
-//
-//                    mySocket.getResultFrm().setVisible(true);
-//                    this.dispose();
+                    ResultFrm resultFrm = new ResultFrm();
+                    mySocket.setResultFrm(resultFrm);
+                    resultFrm.openScene();
+
                     break;
                 case ObjectWrapper.SERVER_TRANSFER_END_GAME_DRAW:
                     playSound("draw.wav");
@@ -319,11 +328,9 @@ public class PlayFrm {
                     alert.setHeaderText(null);
                     alert.setContentText("Trận đấu đã kết thúc, nhấn OK để xem kết quả");
                     alert.showAndWait();
-//                    ResultFrm resultFrm2 = new ResultFrm(mySocket);
-//                    mySocket.setResultFrm(resultFrm2);
-//
-//                    mySocket.getResultFrm().setVisible(true);
-//                    this.dispose();
+                    ResultFrm resultFrmDraw = new ResultFrm();
+                    mySocket.setResultFrm(resultFrmDraw);
+                    resultFrmDraw.openScene();
                     break;
                 case ObjectWrapper.SERVER_TRANSFER_QUIT_WHEN_PLAY:
                     TimeCD.stop();
@@ -331,11 +338,9 @@ public class PlayFrm {
                     alert.setHeaderText(null);
                     alert.setContentText("Đối thủ đã rời đi, nhấn OK để xem kết quả");
                     alert.showAndWait();
-//                    ResultFrm resultFrm1 = new ResultFrm(mySocket);
-//                    mySocket.setResultFrm(resultFrm1);
-//
-//                    mySocket.getResultFrm().setVisible(true);
-//                    this.dispose();
+                    ResultFrm resultFrmQuit = new ResultFrm();
+                    mySocket.setResultFrm(resultFrmQuit);
+                    resultFrmQuit.openScene();
                     break;
             }
         });

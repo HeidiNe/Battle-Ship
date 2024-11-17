@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxWidth="237.0" minWidth="237.0" prefHeight="41.0" prefWidth="237.0" stylesheets="@../../Styles/Main.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" styleClass="itemsUserHome">
+<HBox maxWidth="237.0" minWidth="237.0" prefHeight="41.0" prefWidth="237.0" stylesheets="@../../Styles/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" styleClass="itemsUserHome">
    <children>
       <AnchorPane prefHeight="41.0" prefWidth="206.0">
          <children>

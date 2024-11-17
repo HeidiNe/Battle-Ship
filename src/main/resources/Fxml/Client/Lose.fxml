@@ -23,7 +23,7 @@
          <image>
             <Image url="@../../Images/centilia-cry.gif" />
          </image></ImageView>
-      <ImageView fitHeight="443.0" fitWidth="231.0" layoutX="529.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="73.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="flagRankResultLose" fitHeight="443.0" fitWidth="231.0" layoutX="529.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="73.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../../Images/flagChallenger.png" />
          </image>
@@ -33,23 +33,14 @@
             <Image url="@../../Images/iconbuon.gif" />
          </image>
       </ImageView>
-      <Label layoutX="588.0" layoutY="245.0" text="Challenger">
-         <font>
-            <Font name="Segoe Script Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="613.0" layoutY="284.0" text="1000">
+      <Label fx:id="lblPointLose" layoutX="601.0" layoutY="286.0" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="1000" styleClass="point">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="210.0" layoutY="362.0" text="-1 POINT" textFill="#e04040">
-         <font>
-            <Font name="Segoe UI Bold" size="24.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnPlayAgain" layoutX="250.0" layoutY="455.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="btlNext">
+      <Label layoutX="210.0" layoutY="362.0" text="-1 POINT" styleClass="pointChangeLose"/>
+      <Button fx:id="btnPlayAgainLose" layoutX="224.0" layoutY="426.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" styleClass="btlNext">
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="56.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../Images/continue.png" />
                </image>

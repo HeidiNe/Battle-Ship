@@ -91,7 +91,7 @@ public class PlayerDAO extends DAO {
     public String checkLogin(Player player) {
         boolean result = false;
         System.out.println(player.getUsername() + " " + player.getPassword());
-        String sql = "SELECT username, password FROM players WHERE username = ? AND password = ?";
+        String sql = "SELECT username, password, points FROM players WHERE username = ? AND password = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, player.getUsername());
@@ -99,7 +99,7 @@ public class PlayerDAO extends DAO {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return "true";
+                return String.valueOf(rs.getString("points"));
             }
         } catch (Exception e) {
             e.printStackTrace();

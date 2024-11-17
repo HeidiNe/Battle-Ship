@@ -53,7 +53,7 @@ public class LoginFrm extends Application {
     public void openScene (){
         if(mySocket.getStage() == null) launch();
 
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Client/Login.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
@@ -129,12 +129,12 @@ public class LoginFrm extends Application {
                 msg.setWrapText(true);
                 msg.setText("Error: Incorrect username or password.");
             } else {
-                mySocket.getBackgroundMusicPlayer().stop();
                 TextField usernameLoginTextField = (TextField) loginScreen.lookup("#usernameLoginTextField");
                 String username = usernameLoginTextField.getText();
 
                 mySocket.setUsername(username);
-                System.out.println(username);
+                mySocket.setPoints(Integer.parseInt(result));
+//                System.out.println(username);
 
                 mySocket.sendData(new ObjectWrapper(ObjectWrapper.LOGIN_SUCCESSFUL, mySocket.getUsername()));
 
@@ -142,6 +142,8 @@ public class LoginFrm extends Application {
                     MainFrm mainFrm = new MainFrm();
                     mySocket.setMainFrm(mainFrm);
                 }
+                mySocket.getBackgroundMusicPlayer().stop();
+
                 mySocket.getMainFrm().openScene();
 
             }
@@ -154,7 +156,8 @@ public class LoginFrm extends Application {
         Media backgroundMusic = new Media(backgroundMusicFile);
         backgroundMusicPlayer = new MediaPlayer(backgroundMusic);
         mySocket.setBackgroundMusicPlayer(backgroundMusicPlayer);
-        backgroundMusicPlayer.setVolume(0.5);
+
+        backgroundMusicPlayer.setVolume(0.8);
         backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         
         // Thêm error handler

@@ -1,14 +1,11 @@
 package client.view;
 
 import client.controller.ClientCtr;
-import eu.hansolo.tilesfx.addons.Switch;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -19,7 +16,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import kotlin.Pair;
+import javafx.util.Pair;
 import shared.dto.ObjectWrapper;
 import javafx.application.Platform;
 import shared.dto.PlayerHistory;
@@ -27,7 +24,6 @@ import shared.model.Match;
 import shared.model.Player;
 
 import java.io.File;
-import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -76,6 +72,17 @@ public class MainFrm {
                 history.setVisible(false);
                 ranked.setVisible(false);
 
+                // Set point - rank UI Home
+                Label lblPoints = (Label) loaderHome.getNamespace().get("lblPoints");
+                ImageView flagRankHome = (ImageView) loaderHome.getNamespace().get("flagRankHome");
+                lblPoints.setText(String.valueOf(mySocket.getPoints()));
+                int point = mySocket.getPoints();
+                if (point < 20) flagRankHome.setImage(new Image(getClass().getResource("/Images/flagIntern.png").toExternalForm()));
+                else if (point < 40) flagRankHome.setImage(new Image(getClass().getResource("/Images/flagMaster.png").toExternalForm()));
+                else if (point < 60) flagRankHome.setImage(new Image(getClass().getResource("/Images/flagGrandmaster.png").toExternalForm()));
+                else flagRankHome.setImage(new Image(getClass().getResource("/Images/flagChallenger.png").toExternalForm()));
+
+
                 btnHome.setStyle("-fx-text-fill: rgba(234, 251, 2, 0.7);" +
                         "-fx-background-color: linear-gradient(from 0% 10% to 0% 100%, rgba(248,198,187,0), rgba(156,153,141,0.3));");
                 btnHistory.setStyle("-fx-text-fill: rgba(217, 223, 165, 0.7);");
@@ -123,8 +130,8 @@ public class MainFrm {
 
                     audioClickButton();
                 });
-
                 // Xu ly su kien click vao button Ranking
+
                 btnRanked.setOnAction(event -> {
                     try {
                         home.setVisible(false);
@@ -287,25 +294,59 @@ public class MainFrm {
                             lblUserName.setText(namePlayer);
                             lblStatus.setText(mapUserStatus.get(namePlayer));
 
+                            btnInvite.setOnAction(event -> {
+                                mySocket.sendData(new ObjectWrapper(ObjectWrapper.SEND_PLAY_REQUEST, namePlayer));
+                                audioClickButton();
+                            });
+
+
+                            //check exit user in receive play request
+                            HashMap<String, Pair<Label, Circle>> mapstatusInvite = new HashMap<>();
+                            HashMap<String, HBox> mapHboxInvite = new HashMap<>();
+
+                            VBox receivePlayRequest = (VBox) scene.lookup("#RECEIVE_PLAY_REQUEST");
+                            for (int i = 0; i < receivePlayRequest.getChildren().size(); i++) {
+                                HBox itemUserRequest = (HBox) receivePlayRequest.getChildren().get(i);
+                                AnchorPane anchorPane = (AnchorPane) itemUserRequest.getChildren().getFirst();
+                                Label lblUserNameInvite = (Label) anchorPane.lookup("#userNameInvite");
+                                Label lblStatusInvite = (Label) anchorPane.lookup("#userInvitePlayGame");
+                                Circle circleStatusInvite = (Circle) anchorPane.lookup("#circleStatusInvite");
+                                mapstatusInvite.put(lblUserNameInvite.getText(), new Pair<>(lblStatusInvite, circleStatusInvite));
+                                mapHboxInvite.put(lblUserNameInvite.getText(), itemUserRequest);
+                            }
+
                             if(mapUserStatus.get(namePlayer).equals("Online")) {
                                 circleStatus.setStyle("-fx-stroke: #00ff00");
                                 lblStatus.setStyle("-fx-text-fill: #4a8f4a");
                                 btnInvite.setVisible(true);
+                                if(mapstatusInvite.containsKey(namePlayer)) {
+                                    Pair<Label, Circle> pair = mapstatusInvite.get(namePlayer);
+                                    pair.getKey().setText("Invite to play game");
+                                    pair.getKey().setStyle("-fx-text-fill: rgba(251, 57, 57, 0.7)");
+                                    pair.getValue().setStyle("-fx-stroke: #00ff00");
+                                }
 
-                                btnInvite.setOnAction(event -> {
-                                    mySocket.sendData(new ObjectWrapper(ObjectWrapper.SEND_PLAY_REQUEST, namePlayer));
-                                    audioClickButton();
-                                });
                             } else if(mapUserStatus.get(namePlayer).equals("In Game")) {
                                 circleStatus.setStyle("-fx-stroke: #584ee6");
-                                lblStatus.setStyle("-fx-text-fill: #302a8a");
+                                lblStatus.setStyle("-fx-text-fill: #827ce8");
                                 btnInvite.setVisible(false);
+
+                                if(mapstatusInvite.containsKey(namePlayer)) {
+                                    Pair<Label, Circle> pair = mapstatusInvite.get(namePlayer);
+                                    pair.getKey().setText("Cannot join this queue");
+                                    pair.getKey().setStyle("-fx-text-fill:#827ce8");
+                                    pair.getValue().setStyle("-fx-stroke: #584ee6");
+                                }
                             }
                             else {
-                                circleStatus.setStyle("-fx-stroke: #4f4f50");
-                                lblStatus.setStyle("-fx-text-fill: #a3a3a3");
+                                circleStatus.setStyle("-fx-stroke: rgba(101,104,100,0.76)");
+                                lblStatus.setStyle("-fx-text-fill: rgba(141,147,140,0.77)");
                                 btnInvite.setVisible(false);
+                                if(mapHboxInvite.containsKey(namePlayer)) {
+                                    receivePlayRequest.getChildren().remove(mapHboxInvite.get(namePlayer));
+                                }
                             }
+
                             screnListUserWaiting.getChildren().add(itemUser);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -375,6 +416,8 @@ public class MainFrm {
                     // Tạo formatter theo định dạng dd/MM/yyyy HH:mm:ss
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
+                    listMatch.sort((o1, o2) -> o2.getTimestamp().compareTo(o1.getTimestamp()));
+
                     int index = 1;
                     for(Match match : listMatch) {
                         FXMLLoader itemHistoryLoad = new FXMLLoader(getClass().getResource("/Fxml/Client/ItemHistory.fxml"));
@@ -392,6 +435,12 @@ public class MainFrm {
                             lblTime.setText(String.valueOf(match.getTimestamp().format(formatter)));
                             lblResult.setText(match.getResultUser1());
                             lblPointChange.setText(String.valueOf(match.getPointsChangeUser1()));
+
+                            if(match.getResultUser1().equals("win")) {
+                                lblResult.setStyle("-fx-text-fill: #6ee494");
+                            } else if(match.getResultUser1().equals("afk")) {
+                                lblResult.setStyle("-fx-text-fill: #700009");
+                            }
 
                             index++;
                             vboxHistory.getChildren().add(itemHistory);
@@ -416,7 +465,7 @@ public class MainFrm {
                     for(PlayerHistory playerRank : leaderboard) {
                         mapPlayerRanking.put(playerRank.getUsername(), playerRank);
                         String rank = "";
-                       int point = playerRank.getPoints();
+                        int point = playerRank.getPoints();
                         if (point < 20) {
                             rank = "INTERN";
                             listPlayerRankINTERN.add(playerRank);
@@ -446,7 +495,20 @@ public class MainFrm {
                     VBox vboxRanked = (VBox) scene.lookup("#vboxRanked");
                     ImageView imgRank = (ImageView) scene.lookup("#flagRank");
 
-                    setUIrank(vboxRanked, listPlayerRankINTERN, mapRanking.get(mySocket.getUsername()), imgRank);
+                    switch (mapRanking.get(mySocket.getUsername())) {
+                        case "INTERN":
+                            setUIrank(vboxRanked, listPlayerRankINTERN, "INTERN", imgRank);
+                            break;
+                        case "MASTER":
+                            setUIrank(vboxRanked, listPlayerRankMASTER, "MASTER", imgRank);
+                            break;
+                        case "GRANDMASTER":
+                            setUIrank(vboxRanked, listPlayerRankGRANDMASTER, "GRANDMASTER", imgRank);
+                            break;
+                        case "CHALLENGER":
+                            setUIrank(vboxRanked, listPlayerRankCHALLENGER, "CHALLENGER", imgRank);
+                            break;
+                    }
 
                     choiceBox.setOnAction(event -> {
                         String rank = (String) choiceBox.getValue();
