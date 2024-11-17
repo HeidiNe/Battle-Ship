@@ -324,6 +324,11 @@ public class MainFrm {
                                     pair.getKey().setText("Invite to play game");
                                     pair.getKey().setStyle("-fx-text-fill: rgba(251, 57, 57, 0.7)");
                                     pair.getValue().setStyle("-fx-stroke: #00ff00");
+
+                                    HBox itemUserRequest = mapHboxInvite.get(namePlayer);
+                                    Button btnAccept = (Button) itemUserRequest.lookup("#btnAccept");
+                                    btnAccept.setVisible(true);
+
                                 }
 
                             } else if(mapUserStatus.get(namePlayer).equals("In Game")) {
@@ -336,6 +341,10 @@ public class MainFrm {
                                     pair.getKey().setText("Cannot join this queue");
                                     pair.getKey().setStyle("-fx-text-fill:#827ce8");
                                     pair.getValue().setStyle("-fx-stroke: #584ee6");
+
+                                    HBox itemUserRequest = mapHboxInvite.get(namePlayer);
+                                    Button btnAccept = (Button) itemUserRequest.lookup("#btnAccept");
+                                    btnAccept.setVisible(false);
                                 }
                             }
                             else {
