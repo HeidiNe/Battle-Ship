@@ -171,6 +171,7 @@ public class SetShipFrm {
                 if (result.isPresent() && result.get() == yesButton) {
                     TimeCD.stop();
                     mySocket.sendData(new ObjectWrapper(ObjectWrapper.QUIT_WHEN_SET_SHIP));
+                    mySocket.setPoints(mySocket.getPoints()-1);
                     mySocket.setSetShipFrm(null);
                     mySocket.setSetShipScene(null);
                     if (mySocket.getMainFrm() == null) {
