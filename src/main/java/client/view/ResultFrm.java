@@ -1,29 +1,21 @@
 package client.view;
 
 import client.controller.ClientCtr;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import shared.dto.ObjectWrapper;
-import shared.dto.PlayerHistory;
-import shared.model.Match;
-import shared.model.Player;
 
+import java.io.File;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 
 public class ResultFrm  {
 
@@ -40,18 +32,7 @@ public class ResultFrm  {
         // Sau đó xử lý UI trong Platform.runLater
         Platform.runLater(() -> {
             try {
-
-                System.out.println("In result form: ");
                 mySocket.sendData(new ObjectWrapper(ObjectWrapper.GET_RESULT));
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Result.fxml"));
-                Scene scene = new Scene(loader.load());
-                mySocket.setResultScene(scene);
-
-                stage.setScene(scene);
-                stage.setTitle("Result");
-                stage.show();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -70,31 +51,40 @@ public class ResultFrm  {
                     String result = resultAndUserNameEnemy[0];
                     String usernameEnemy = resultAndUserNameEnemy[1];
 
-                    if (result.equals("win")) {
-                        FXMLLoader win = new FXMLLoader(getClass().getResource("/Fxml/Client/Win.fxml"));
-                        try {
-                            Scene winScene = win.load();
-                            Button btn = (Button) win.getNamespace().get("btnPlayAgain");
-                            btn.setOnAction(e -> {
-                                mySocket.sendData(new ObjectWrapper(ObjectWrapper.BACK_TO_MAIN_FORM));
-                                stage.setScene(mySocket.getMainScene());
-                            });
-
-                            stage.setScene(winScene);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                    } else if (result.equals("loss")) {
+                    if (result.equals("loss")) {
                         FXMLLoader loss = new FXMLLoader(getClass().getResource("/Fxml/Client/Lose.fxml"));
                         try {
-                            Scene lossScene = loss.load();
-                            Button btn = (Button) loss.getNamespace().get("btnPlayAgain");
-                            btn.setOnAction(e -> {
-                                mySocket.sendData(new ObjectWrapper(ObjectWrapper.BACK_TO_MAIN_FORM));
-                                stage.setScene(mySocket.getMainScene());
-                            });
+                            String clickButtonFile = new File("src/main/resources/Sounds/lose.mp3").toURI().toString();
+                            Media clickButton = new Media(clickButtonFile);
+                            MediaPlayer clickButtonPlayer = new MediaPlayer(clickButton);
+                            clickButtonPlayer.setVolume(0.8);
+                            clickButtonPlayer.play();
 
+                            Scene lossScene = new Scene(loss.load());
+                            mySocket.setResultScene(lossScene);
+                            stage.setScene(lossScene);
+                            stage.setTitle("Result");
+                            stage.show();
+
+                            //set point and flag
+                            ImageView flagLose = (ImageView) loss.getNamespace().get("flagRankResultLose");
+                            Label lblPointLose = (Label) loss.getNamespace().get("lblPointLose");;
+                            int point = mySocket.getPoints();
+                            mySocket.setPoints(point - 1);
+                            lblPointLose.setText(String.valueOf(point - 1));
+
+                            if (point < 20) flagLose.setImage(new Image(getClass().getResource("/Images/flagIntern.png").toExternalForm()));
+                            else if (point < 40) flagLose.setImage(new Image(getClass().getResource("/Images/flagMaster.png").toExternalForm()));
+                            else if (point < 60) flagLose.setImage(new Image(getClass().getResource("/Images/flagGrandmaster.png").toExternalForm()));
+                            else flagLose.setImage(new Image(getClass().getResource("/Images/flagChallenger.png").toExternalForm()));
+
+                            Button btnLoseGo = (Button) loss.getNamespace().get("btnPlayAgainLose");
+                            btnLoseGo.setOnAction(e -> {
+                                clicBackMain();
+                                mySocket.sendData(new ObjectWrapper(ObjectWrapper.BACK_TO_MAIN_FORM));
+                                mySocket.getMainFrm().openScene();
+                                clickButtonPlayer.stop();
+                            });
                             stage.setScene(lossScene);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
@@ -102,29 +92,62 @@ public class ResultFrm  {
                     } else {
                         FXMLLoader win = new FXMLLoader(getClass().getResource("/Fxml/Client/Win.fxml"));
                         try {
-                            Scene winScene = win.load();
-                            Button btn = (Button) win.getNamespace().get("btnPlayAgain");
-                            Label lblPoint = (Label) win.getNamespace().get("lblPoint");
-                            lblPoint.setText("+0 POINT");
+                            String clickButtonFile = new File("src/main/resources/Sounds/win.mp3").toURI().toString();
+                            Media clickButton = new Media(clickButtonFile);
+                            MediaPlayer clickButtonPlayer = new MediaPlayer(clickButton);
+                            clickButtonPlayer.setVolume(0.8);
+                            clickButtonPlayer.play();
 
-                            btn.setOnAction(e -> {
+                            Scene winScene  = new Scene(win.load());
+                            mySocket.setResultScene(winScene);
+                            stage.setScene(winScene);
+                            stage.setTitle("Result");
+                            stage.show();
+
+                            //set point and flag
+                            ImageView flagWin = (ImageView) win.getNamespace().get("flagRankResultWin");
+                            Label lblPointWin = (Label) win.getNamespace().get("lblPointWin");;
+                            int point = mySocket.getPoints();
+
+
+                            if(result.equals("win")) {
+                                point = point + 1;
+                                mySocket.setPoints(point);
+                            }
+                            else {
+                                Label lblPointChange = (Label) win.getNamespace().get("lblPointChange");
+                                lblPointChange.setText("+0 POINT");
+                            }
+                            lblPointWin.setText(String.valueOf(point));
+
+                            if (point < 20) flagWin.setImage(new Image(getClass().getResource("/Images/flagIntern.png").toExternalForm()));
+                            else if (point < 40) flagWin.setImage(new Image(getClass().getResource("/Images/flagMaster.png").toExternalForm()));
+                            else if (point < 60) flagWin.setImage(new Image(getClass().getResource("/Images/flagGrandmaster.png").toExternalForm()));
+                            else flagWin.setImage(new Image(getClass().getResource("/Images/flagChallenger.png").toExternalForm()));
+
+                            Button btnWinGo = (Button) win.getNamespace().get("btnPlayAgainWin");
+                            btnWinGo.setOnAction(e -> {
+                                clicBackMain();
                                 mySocket.sendData(new ObjectWrapper(ObjectWrapper.BACK_TO_MAIN_FORM));
-                                stage.setScene(mySocket.getMainScene());
+                                mySocket.getMainFrm().openScene();
+                                clickButtonPlayer.stop();
                             });
-
                             stage.setScene(winScene);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                     }
-                    break;
-
             }
         });
 
     }
 
 
-    public void initializeBackgroundMusic() {
+    public void clicBackMain () {
+        String clickButtonFile = new File("src/main/resources/Sounds/buttonBackMain.mp3").toURI().toString();
+        Media clickButton = new Media(clickButtonFile);
+        MediaPlayer clickButtonPlayer = new MediaPlayer(clickButton);
+        clickButtonPlayer.setVolume(0.8);
+        clickButtonPlayer.play();
     }
 }
