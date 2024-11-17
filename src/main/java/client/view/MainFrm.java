@@ -174,7 +174,7 @@ public class MainFrm {
                 //button refresh
                 Button btnRefresh = (Button) loader.getNamespace().get("btnRefresh");
                 btnRefresh.setOnAction(event -> {
-                    mySocket.sendData(new ObjectWrapper(ObjectWrapper.UPDATE_WAITING_LIST_REQUEST, null));
+                    mySocket.sendData(new ObjectWrapper(ObjectWrapper.GET_ALL_USER, null));
                     System.out.println("Refresh");
                 });
 
@@ -193,6 +193,11 @@ public class MainFrm {
 
             switch (data.getPerformative()) {
                 case ObjectWrapper.SERVER_SEND_ALL_USER:
+
+                    if (scene == null) {
+                        mySocket.getMainFrm().openScene();
+                        break;
+                    }
 
                     ArrayList<Player> listUser = (ArrayList<Player>) data.getData();
                     listUser.sort((o1, o2) -> o1.getUsername().compareTo(o2.getUsername()));
@@ -264,7 +269,8 @@ public class MainFrm {
                     // Cap nhat lai trang thai cua cua user
                     // Kiem tra xem co user moi nao khong (truong hop co user nao do moi tao tai khoan nen khong biet)
                     for (Player player : listUserWaiting) {
-                        if (!mapUserStatus.containsKey(player.getUsername()) && !player.getUsername().equals(mySocket.getUsername())) listUserStatus.add(player.getUsername());
+                        if (!mapUserStatus.containsKey(player.getUsername()) && !player.getUsername().equals(mySocket.getUsername()))
+                            listUserStatus.add(player.getUsername());
 
                         if(player.getStatus().equals("Online")) mapUserStatus.put(player.getUsername(), "Online");
                         else mapUserStatus.put(player.getUsername(), "In Game");
@@ -336,16 +342,21 @@ public class MainFrm {
                                 lblStatus.setStyle("-fx-text-fill: #827ce8");
                                 btnInvite.setVisible(false);
 
-                                if(mapstatusInvite.containsKey(namePlayer)) {
-                                    Pair<Label, Circle> pair = mapstatusInvite.get(namePlayer);
-                                    pair.getKey().setText("Cannot join this queue");
-                                    pair.getKey().setStyle("-fx-text-fill:#827ce8");
-                                    pair.getValue().setStyle("-fx-stroke: #584ee6");
-
-                                    HBox itemUserRequest = mapHboxInvite.get(namePlayer);
-                                    Button btnAccept = (Button) itemUserRequest.lookup("#btnAccept");
-                                    btnAccept.setVisible(false);
+                                if(mapHboxInvite.containsKey(namePlayer)) {
+                                    receivePlayRequest.getChildren().remove(mapHboxInvite.get(namePlayer));
+                                    System.out.println("remove: " + namePlayer);
                                 }
+
+//                                if(mapstatusInvite.containsKey(namePlayer)) {
+//                                    Pair<Label, Circle> pair = mapstatusInvite.get(namePlayer);
+//                                    pair.getKey().setText("Cannot join this queue");
+//                                    pair.getKey().setStyle("-fx-text-fill:#827ce8");
+//                                    pair.getValue().setStyle("-fx-stroke: #584ee6");
+//
+//                                    HBox itemUserRequest = mapHboxInvite.get(namePlayer);
+//                                    Button btnAccept = (Button) itemUserRequest.lookup("#btnAccept");
+//                                    btnAccept.setVisible(false);
+//                                }
                             }
                             else {
                                 circleStatus.setStyle("-fx-stroke: rgba(101,104,100,0.76)");
@@ -353,6 +364,7 @@ public class MainFrm {
                                 btnInvite.setVisible(false);
                                 if(mapHboxInvite.containsKey(namePlayer)) {
                                     receivePlayRequest.getChildren().remove(mapHboxInvite.get(namePlayer));
+                                    System.out.println("remove: " + namePlayer);
                                 }
                             }
 

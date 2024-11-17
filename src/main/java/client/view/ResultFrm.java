@@ -70,8 +70,7 @@ public class ResultFrm  {
                             ImageView flagLose = (ImageView) loss.getNamespace().get("flagRankResultLose");
                             Label lblPointLose = (Label) loss.getNamespace().get("lblPointLose");;
                             int point = mySocket.getPoints();
-                            mySocket.setPoints(point - 1);
-                            lblPointLose.setText(String.valueOf(point - 1));
+                            lblPointLose.setText(String.valueOf(point));
 
                             if (point < 20) flagLose.setImage(new Image(getClass().getResource("/Images/flagIntern.png").toExternalForm()));
                             else if (point < 40) flagLose.setImage(new Image(getClass().getResource("/Images/flagMaster.png").toExternalForm()));

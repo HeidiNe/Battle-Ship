@@ -7,8 +7,7 @@
     <list default="true" id="ff6bcba6-17c0-4544-ba81-344aaa0f8105" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/MainFrm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Lose.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Lose.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Win.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Fxml/Client/Win.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/view/ResultFrm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/view/ResultFrm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +87,7 @@
       <recent name="client.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ServerMainFrm">
+  <component name="RunManager" selected="Application.ConnectFrm">
     <configuration name="ConnectFrm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.view.ConnectFrm" />
       <module name="Battle-Ship" />
@@ -156,8 +155,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerMainFrm" />
         <item itemvalue="Application.ConnectFrm" />
+        <item itemvalue="Application.ServerMainFrm" />
         <item itemvalue="Application.LoginFrm" />
         <item itemvalue="Application.RankingFrm" />
         <item itemvalue="Application.HelloApplication" />
@@ -223,7 +222,9 @@
       <workItem from="1731654934892" duration="5000" />
       <workItem from="1731665774467" duration="2300000" />
       <workItem from="1731728134674" duration="594000" />
-      <workItem from="1731806969827" duration="1201000" />
+      <workItem from="1731806969827" duration="3173000" />
+      <workItem from="1731812481326" duration="1427000" />
+      <workItem from="1731821664100" duration="119000" />
     </task>
     <servers />
   </component>
