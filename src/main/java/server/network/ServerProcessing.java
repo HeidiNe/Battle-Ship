@@ -122,8 +122,8 @@ public class ServerProcessing extends Thread {
                                 sendData(new ObjectWrapper(ObjectWrapper.SERVER_SET_GAME_READY));
                                 gameCtr = new GameCtr();
                                 enemy.gameCtr = new GameCtr();
-                                countDownSetShip(91);
-                                enemy.countDownSetShip(91);
+                                countDownSetShip(93);
+                                enemy.countDownSetShip(93);
                                 serverCtr.sendWaitingList();
                             } else {
 //                                enemy.sendData(new ObjectWrapper(ObjectWrapper.ENEMY_IN_GAME_ERROR));
@@ -152,7 +152,7 @@ public class ServerProcessing extends Thread {
                                 if ((int) Math.random() * 10 % 2 == 0) {
                                     sendData(new ObjectWrapper(ObjectWrapper.SERVER_RANDOM_TURN));
                                     gameCtr.setPlayerTurn(true);
-                                    countDownPlay(16);
+                                    countDownPlay(18);
 
                                     enemy.sendData(new ObjectWrapper(ObjectWrapper.SERVER_RANDOM_NOT_TURN));
                                     enemy.gameCtr.setPlayerTurn(false);
@@ -161,7 +161,7 @@ public class ServerProcessing extends Thread {
                                     gameCtr.setPlayerTurn(false);
                                     enemy.sendData(new ObjectWrapper(ObjectWrapper.SERVER_RANDOM_TURN));
                                     enemy.gameCtr.setPlayerTurn(true);
-                                    enemy.countDownPlay(16);
+                                    enemy.countDownPlay(18);
                                 }
                                 sendData(new ObjectWrapper(ObjectWrapper.SERVER_START_PLAY_GAME));
                                 enemy.sendData(new ObjectWrapper(ObjectWrapper.SERVER_START_PLAY_GAME));
@@ -190,7 +190,7 @@ public class ServerProcessing extends Thread {
                                 gameCtr.setShot(false);
                                 enemy.sendData(new ObjectWrapper(ObjectWrapper.SERVER_TRANSFER_SHOOT_FAILTURE, location));
                                 enemy.gameCtr.setPlayerTurn(true);
-                                enemy.countDownPlay(16);
+                                enemy.countDownPlay(18);
                             } else {
                                 if (result[1] != null) {
                                     String[] destroyedShip = (String[]) result[1];
@@ -198,7 +198,7 @@ public class ServerProcessing extends Thread {
                                         sendData(new ObjectWrapper(ObjectWrapper.SERVER_TRANSFER_SHOOT_HIT_SHIP, destroyedShip));
                                         gameCtr.setShot(false);
                                         enemy.sendData(new ObjectWrapper(ObjectWrapper.SERVER_TRANSFER_SHOOT_HIT_SHIP, destroyedShip));
-                                        countDownPlay(16);
+                                        countDownPlay(18);
                                     } else {
                                         this.result = "win";
                                         enemy.result = "loss";
@@ -217,7 +217,7 @@ public class ServerProcessing extends Thread {
                                     sendData(new ObjectWrapper(ObjectWrapper.SERVER_TRANSFER_SHOOT_HIT_POINT, location));
                                     gameCtr.setShot(false);
                                     enemy.sendData(new ObjectWrapper(ObjectWrapper.SERVER_TRANSFER_SHOOT_HIT_POINT, location));
-                                    countDownPlay(16);
+                                    countDownPlay(18);
                                 }
                             }
                             break;
@@ -425,7 +425,7 @@ public class ServerProcessing extends Thread {
                             gameCtr.setShot(false);
                             gameCtr.setPlayerTurn(false);
                             enemy.gameCtr.setPlayerTurn(true);
-                            enemy.countDownPlay(16);
+                            enemy.countDownPlay(18);
                         }
                     }
                 }

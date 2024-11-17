@@ -69,22 +69,18 @@
     -fx-background-color: #455a64;
 }
 
-.ver{
-    -fx-padding: 2px;
-    -fx-cursor: pointer;
-}
-
-.hor{
-    -fx-padding: 2px;
-    -fx-cursor: pointer;
-}
-
-
 .checkbox:hover{
     -fx-background-color: #e8f5e9;
+    -fx-cursor: pointer;
 }
 
 .checkbox:selected {
     -fx-border-color: #388e3c; 
     -fx-text-fill: white; 
+}
+.timer-circle {
+    -fx-fill: linear-gradient(to bottom, #2196f3, #1976d2); /* Gradient xanh dương */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 10, 0.5, 0, 5); /* Đổ bóng */
+    -fx-stroke: #0d47a1; /* Viền xanh đậm */
+    -fx-stroke-width: 4; /* Độ dày của viền */
 }

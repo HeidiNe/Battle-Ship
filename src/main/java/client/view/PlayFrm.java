@@ -276,11 +276,6 @@ public class PlayFrm {
             // Khi thời gian hết, dừng và chuyển trạng thái
             if (timeRemaining[0] <= 0) {
                 timeline.stop(); // Dừng Timeline
-                if (playerTurn) {
-                    startEnemyTurn(); // Tự động chuyển lượt
-                } else {
-                    startYourTurn();
-                }
             }
         }));
 
