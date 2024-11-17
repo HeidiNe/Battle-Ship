@@ -49,7 +49,6 @@ public class SetShipFrm {
     private ArrayList<String> shipListModel = new ArrayList<>(Arrays.asList("#ship2", "#ship3-1", "#ship3-2", "#ship4", "#ship5"));
     private ArrayList<String> shipsLocation = new ArrayList<>();
     private Timeline TimeCD;
-    MediaPlayer backgroundMusicPlayer;
     public SetShipFrm() {
     }
 
@@ -64,7 +63,6 @@ public class SetShipFrm {
             stage.setScene(scene);
             stage.setTitle("Set Ship");
             stage.show();
-            initializeBackgroundMusic();
             for(String shipId : shipListModel){
                 ImageView ship = (ImageView) scene.lookup(shipId);
                 if (ship != null) {
@@ -152,7 +150,6 @@ public class SetShipFrm {
             Button readyBtn = (Button) scene.lookup("#readyBtn");
             readyBtn.setOnMouseClicked(e ->{
                 playSound("ready.wav");
-                backgroundMusicPlayer.stop();
                 ready();
             });
             
@@ -472,27 +469,6 @@ public class SetShipFrm {
         beepPlayer.play();
     }
     
-    public void initializeBackgroundMusic(){
-        // tao am thanh nen
-        String backgroundMusicFile = new File("src/main/resources/Sounds/countdown_join.mp3").toURI().toString();
-        Media backgroundMusic = new Media(backgroundMusicFile);
-        backgroundMusicPlayer = new MediaPlayer(backgroundMusic);
-
-        backgroundMusicPlayer.setVolume(0.1);
-        backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-
-        // Thêm error handler
-        backgroundMusicPlayer.setOnError(() -> {
-            System.out.println("Media error occurred: " + backgroundMusicPlayer.getError());
-        });
-
-        // Thêm status listener để debug
-        backgroundMusicPlayer.statusProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Status changed from " + oldValue + " to " + newValue);
-        });
-
-        backgroundMusicPlayer.play();
-    }
     
     private void playSound(String soundFileName) {
         try {
