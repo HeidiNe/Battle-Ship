@@ -460,7 +460,7 @@ public class MainFrm {
                             if(match.getResultUser1().equals("win")) {
                                 lblResult.setStyle("-fx-text-fill: #6ee494");
                             } else if(match.getResultUser1().equals("afk")) {
-                                lblResult.setStyle("-fx-text-fill: #700009");
+                                lblResult.setStyle("-fx-text-fill: rgb(251, 51, 51)");
                             }
 
                             index++;

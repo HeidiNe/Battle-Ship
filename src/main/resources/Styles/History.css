@@ -1,6 +1,6 @@
 .lblItemUserHistory{
     --fx-background-color: rgba(255, 23, 23, 0);
-    -fx-text-fill: rgba(221, 244, 21, 0.7);
+    -fx-text-fill: rgba(221, 244, 21, 1);
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
     -fx-font-size: 14px;
@@ -8,7 +8,7 @@
 
 .lblItemHistory{
     --fx-background-color: rgba(255, 23, 23, 0);
-    -fx-text-fill: rgba(217, 223, 165, 0.7);
+    -fx-text-fill: rgba(217, 223, 165, 1);
     -fx-font-size: 13px;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 500;
@@ -16,7 +16,7 @@
 
 .lblItemSttHistory{
     -fx-background-color: rgba(255, 23, 23, 0);
-    -fx-text-fill: rgba(217, 223, 165, 0.7);
+    -fx-text-fill: rgba(217, 223, 165, 1);
     -fx-font-size: 13px;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 500;
@@ -37,7 +37,7 @@
 }
 
 .title-lable{
-    -fx-text-fill: rgba(251, 51, 51, 0.5);
+    -fx-text-fill: rgb(251, 51, 51);
     -fx-font-size: 15px;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
@@ -45,7 +45,7 @@
 }
 
 .title-lable-home{
-    -fx-text-fill: rgba(251, 51, 51, 0.5);
+    -fx-text-fill: rgb(251, 51, 51);
     -fx-font-size: 18px;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
@@ -63,7 +63,7 @@
 }
 
 .title-lable-name{
-    -fx-text-fill: rgba(251, 51, 51, 0.5);
+    -fx-text-fill: rgb(251, 51, 51);
     -fx-font-size: 15px;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
@@ -82,7 +82,7 @@
 
 /* Style cho item được chọn */
 .choice-box .label {
-    -fx-text-fill: #af4848;
+    -fx-text-fill: #cf3232;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
     -fx-font-size: 24px;
@@ -94,14 +94,14 @@
 }
 
 .choice-box .menu-item > .label {
-    -fx-text-fill: #af4848;
+    -fx-text-fill: #cf3232;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
     -fx-font-size: 24px;
 }
 
 .choice-box .menu-item:focused > .label {
-    -fx-text-fill: #af4848;
+    -fx-text-fill: #cf3232;
     -fx-font-family: JejuHallasan;
     -fx-font-weight: 700;
     -fx-font-size: 24px;
