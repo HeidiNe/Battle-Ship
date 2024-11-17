@@ -74,6 +74,7 @@ public class PlayFrm {
                 if (result.isPresent() && result.get() == yesButton) {
                     TimeCD.stop();
                     mySocket.sendData(new ObjectWrapper(ObjectWrapper.QUIT_WHEN_PLAY));
+                    mySocket.setPoints(mySocket.getPoints() - 1);
                     mySocket.setPlayFrm(null);
                     mySocket.setPlayScene(null);
                     mySocket.setSetShipFrm(null);
