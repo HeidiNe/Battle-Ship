@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="516.0" fitWidth="778.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/backgroundWin.gif" />
+            <Image url="@../../Images/backgroundWin.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="409.0" fitWidth="481.0" layoutX="28.0" pickOnBounds="true" preserveRatio="true">

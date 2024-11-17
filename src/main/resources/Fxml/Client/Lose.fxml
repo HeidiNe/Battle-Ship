@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="516.0" fitWidth="810.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/backgroundLose.gif" />
+            <Image url="@../../Images/backgroundLose.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="348.0" fitWidth="342.0" layoutX="105.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="0.0">
@@ -33,11 +33,11 @@
             <Image url="@../../Images/iconbuon.gif" />
          </image>
       </ImageView>
-      <Label fx:id="lblPointLose" layoutX="601.0" layoutY="286.0" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="1000" styleClass="point">
+      <Label fx:id="lblPointLose" layoutX="601.0" layoutY="286.0" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" styleClass="point" text="1000">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="210.0" layoutY="362.0" text="-1 POINT" styleClass="pointChangeLose"/>
+      <Label layoutX="210.0" layoutY="362.0" styleClass="pointChangeLose" text="-1 POINT" />
       <Button fx:id="btnPlayAgainLose" layoutX="224.0" layoutY="426.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" styleClass="btlNext">
          <graphic>
             <ImageView fitHeight="56.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
