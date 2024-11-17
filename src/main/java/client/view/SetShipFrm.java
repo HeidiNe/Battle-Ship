@@ -10,6 +10,7 @@ import client.controller.ClientCtr;
 import client.helper.ShipGenerator;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -32,6 +33,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import server.helper.CountDownTimer;
 
 public class SetShipFrm {
@@ -45,12 +49,12 @@ public class SetShipFrm {
     private ArrayList<String> shipListModel = new ArrayList<>(Arrays.asList("#ship2", "#ship3-1", "#ship3-2", "#ship4", "#ship5"));
     private ArrayList<String> shipsLocation = new ArrayList<>();
     private Timeline TimeCD;
-    
+    MediaPlayer backgroundMusicPlayer;
     public SetShipFrm() {
     }
 
     public void openScene(){
-
+        
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/SetShip.fxml"));
@@ -60,6 +64,7 @@ public class SetShipFrm {
             stage.setScene(scene);
             stage.setTitle("Set Ship");
             stage.show();
+            initializeBackgroundMusic();
             for(String shipId : shipListModel){
                 ImageView ship = (ImageView) scene.lookup(shipId);
                 if (ship != null) {
@@ -67,6 +72,7 @@ public class SetShipFrm {
                     double originalScaleY = ship.getScaleY();
                    
                     ship.setOnMouseClicked(event -> {
+                        playSound("setShip.wav");
                         if(shipId == "#ship2") {
                             shipSize =2;
                             shipIndexList=0;
@@ -131,21 +137,22 @@ public class SetShipFrm {
             // add event to random btn 
             Button randomBtn = (Button) scene.lookup("#randomBtn");
             randomBtn.setOnMouseClicked(e ->{
-                audioClickButton();
+                playSound("setShip.wav");
                 random();
             });
             
             // add event to reset btn 
             Button resetBtn = (Button) scene.lookup("#resetBtn");
             resetBtn.setOnMouseClicked(e ->{
-                audioClickButton();
+                playSound("setShip.wav");
                 reset();
             });
             
             // add event to ready btn 
             Button readyBtn = (Button) scene.lookup("#readyBtn");
             readyBtn.setOnMouseClicked(e ->{
-                audioClickButton();
+                playSound("ready.wav");
+                backgroundMusicPlayer.stop();
                 ready();
             });
             
@@ -232,6 +239,7 @@ public class SetShipFrm {
     }
 
     private void handleGridClick(MouseEvent e, Pane cell) {
+        playSound("setShip.wav");
         String cellName = cell.getId();
         if (shipSize == 0 || !isValidLocation(cellName)) {
             System.out.println(shipSize + " " + cellName);
@@ -462,6 +470,46 @@ public class SetShipFrm {
         MediaPlayer beepPlayer = new MediaPlayer(beep);
         beepPlayer.setVolume(1);
         beepPlayer.play();
+    }
+    
+    public void initializeBackgroundMusic(){
+        // tao am thanh nen
+        String backgroundMusicFile = new File("src/main/resources/Sounds/countdown_join.mp3").toURI().toString();
+        Media backgroundMusic = new Media(backgroundMusicFile);
+        backgroundMusicPlayer = new MediaPlayer(backgroundMusic);
+
+        backgroundMusicPlayer.setVolume(0.1);
+        backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+        // Thêm error handler
+        backgroundMusicPlayer.setOnError(() -> {
+            System.out.println("Media error occurred: " + backgroundMusicPlayer.getError());
+        });
+
+        // Thêm status listener để debug
+        backgroundMusicPlayer.statusProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Status changed from " + oldValue + " to " + newValue);
+        });
+
+        backgroundMusicPlayer.play();
+    }
+    
+    private void playSound(String soundFileName) {
+        try {
+            InputStream audioSrc = getClass().getClassLoader().getResourceAsStream("Sounds/" + soundFileName);
+            if (audioSrc == null) {
+                System.out.println("File không tồn tại: " + soundFileName);
+                return;
+            }
+
+            // Đọc audio từ InputStream
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioSrc);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
