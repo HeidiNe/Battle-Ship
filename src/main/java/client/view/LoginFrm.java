@@ -157,7 +157,7 @@ public class LoginFrm extends Application {
         backgroundMusicPlayer = new MediaPlayer(backgroundMusic);
         mySocket.setBackgroundMusicPlayer(backgroundMusicPlayer);
 
-        backgroundMusicPlayer.setVolume(0.8);
+        backgroundMusicPlayer.setVolume(0.6);
         backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         
         // Thêm error handler

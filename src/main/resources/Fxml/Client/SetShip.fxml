@@ -208,7 +208,7 @@
             <Insets left="8.0" />
          </padding>
       </VBox>
-      <VBox layoutX="400.0" layoutY="289.0" prefHeight="95.0" prefWidth="178.0" styleClass="ship-stack">
+      <VBox layoutX="399.0" layoutY="306.0" opacity="0.92" prefHeight="59.0" prefWidth="178.0" styleClass="ship-stack">
          <children>
             <RadioButton id="horizontal" mnemonicParsing="false" selected="true" styleClass="hor" text="Horizontal">
                <VBox.margin>
@@ -219,7 +219,7 @@
                   <Insets left="30.0" />
                </VBox.margin></RadioButton>
          </children></VBox>
-      <VBox layoutX="595.0" layoutY="87.0" prefHeight="200.0" prefWidth="160.0" styleClass="ship-stack">
+      <VBox layoutX="595.0" layoutY="70.0" prefHeight="200.0" prefWidth="160.0" styleClass="ship-stack">
          <children>
             <Button id="readyBtn" mnemonicParsing="false" prefHeight="27.0" prefWidth="77.0" styleClass="ready" text="Ready">
                <VBox.margin>
@@ -248,7 +248,7 @@
          </children>
       </HBox>
       <Circle fill="#a0c2e1" layoutX="675.0" layoutY="336.0" opacity="0.84" radius="37.0" stroke="BLACK" strokeType="INSIDE" styleClass="timer-circle" />
-      <Label id="clock" alignment="CENTER" ellipsisString="" layoutX="644.0" layoutY="307.0" prefHeight="59.0" prefWidth="64.0" styleClass="timer-label" textAlignment="CENTER" textFill="#cccccc">
+      <Label id="clock" alignment="CENTER" ellipsisString="" layoutX="643.0" layoutY="306.0" prefHeight="59.0" prefWidth="64.0" styleClass="timer-label" textAlignment="CENTER" textFill="#cccccc">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

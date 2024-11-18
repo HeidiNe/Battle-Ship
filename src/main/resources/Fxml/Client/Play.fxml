@@ -19,7 +19,7 @@
             <Image url="@../../Images/intro.gif" />
          </image>
       </ImageView>
-      <GridPane id="mygrid" gridLinesVisible="true" layoutX="31.0" layoutY="72.0" prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: lightblue;">
+      <GridPane id="mygrid" gridLinesVisible="true" layoutX="26.0" layoutY="72.0" prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: lightblue;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -42,11 +42,11 @@
         </rowConstraints>
       </GridPane>
       <HBox layoutX="64.0" layoutY="14.0" prefHeight="42.0" prefWidth="198.0" />
-      <Label id="enemyMsg" alignment="CENTER" layoutX="31.0" layoutY="436.0" prefHeight="62.0" prefWidth="350.0" styleClass="label-enemy-turn" stylesheets="@../../Styles/play.css" text="Label" textAlignment="CENTER" textFill="WHITE">
+      <Label id="enemyMsg" alignment="CENTER" layoutX="29.0" layoutY="436.0" prefHeight="62.0" prefWidth="350.0" styleClass="label-enemy-turn" stylesheets="@../../Styles/play.css" text="Label" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="40.0" />
          </font></Label>
-      <Label id="myMsg" alignment="CENTER" layoutX="423.0" layoutY="436.0" prefHeight="62.0" prefWidth="340.0" styleClass="label-your-turn" stylesheets="@../../Styles/play.css" text="Label" textAlignment="CENTER" textFill="WHITE">
+      <Label id="myMsg" alignment="CENTER" layoutX="419.0" layoutY="436.0" prefHeight="62.0" prefWidth="340.0" styleClass="label-your-turn" stylesheets="@../../Styles/play.css" text="Label" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="40.0" />
          </font></Label>
